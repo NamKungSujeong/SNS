@@ -1,7 +1,15 @@
-import Router from "../componetns/Router";
+import { useState } from "react";
+import AppRouter from "./Router";
+import { authService } from "../fbase";
 
 function App() {
-  return <Router />;
+  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+
+  return (
+    <>
+      <AppRouter isLoggedIn={isLoggedIn} />
+    </>
+  );
 }
 
 export default App;

@@ -1,5 +1,11 @@
 import React from "react";
 
-const Auth = () => <span>Auth</span>;
+const Auth = () => {
+  return (
+    <>
+      <span>Auth</span>
+    </>
+  );
+};
 
 export default Auth;
