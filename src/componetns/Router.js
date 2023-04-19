@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import Profile from "routes/Profile";
