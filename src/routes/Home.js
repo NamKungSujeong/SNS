@@ -7,10 +7,7 @@ import {
   query,
 } from "firebase/firestore";
 import { dbService } from "fbase";
-import { format, register } from "timeago.js";
-import koLocale from "timeago.js/lib/lang/ko";
-
-register("ko", koLocale);
+import Sweet from "componetns/Sweet";
 
 const Home = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
@@ -61,10 +58,11 @@ const Home = ({ userObj }) => {
         <input type="submit" value="send" onClick={onSubmit} />
       </form>
       {sweets.map((sweet) => (
-        <div key={sweet.id}>
-          {sweet.text}
-          {format(sweet.createdAt, "ko")}
-        </div>
+        <Sweet
+          key={sweet.id}
+          sweetObj={sweet}
+          isOwner={sweet.creatorId === userObj.uid}
+        />
       ))}
     </div>
   );
