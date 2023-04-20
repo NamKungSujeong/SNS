@@ -1,6 +1,7 @@
-import { dbService } from "fbase";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
+import { dbService, storageService } from "fbase";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 
@@ -13,8 +14,13 @@ const Sweet = ({ sweetObj, isOwner }) => {
 
   const onDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠습니까?");
+
     if (ok) {
       await deleteDoc(sweetRef);
+
+      if (sweetObj.attachmentURL !== "") {
+        await deleteObject(ref(storageService, sweetObj.attachmentURL));
+      }
     }
   };
 
