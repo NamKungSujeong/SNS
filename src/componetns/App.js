@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import AppRouter from "./Router";
 import { authService } from "../fbase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [init, setInin] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  // const [refreshNewName, setRefreshNewName] = useState("");
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
       if (user) {
+        if (user.displayName == null) {
+          const userName = user.email.split("@")[0];
+          user.displayName = userName;
+        }
         setIsLoggedIn(true);
         setUserObj(user);
       } else {
@@ -19,10 +24,19 @@ function App() {
       setInin(true);
     });
   }, []);
+
+  const refreshUser = async () => {
+    await updateCurrentUser(authService, authService.currentUser);
+    setUserObj(authService.currentUser);
+  };
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+        <AppRouter
+          isLoggedIn={isLoggedIn}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
       ) : (
         "로딩중..."
       )}
