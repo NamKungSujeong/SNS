@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   addDoc,
   collection,
@@ -6,13 +7,14 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { dbService } from "fbase";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { dbService, storageService } from "fbase";
 import Sweet from "componetns/Sweet";
 
 const Home = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
   const [sweets, setSweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     const q = query(
@@ -30,16 +32,25 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   await addDoc(collection(dbService, "sweets"), {
-    //     text: sweet,
-    //     createdAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   });
-    // } catch (err) {
-    //   console.log("Error adding document", err);
-    // }
-    // setSweet("");
+    let attachmentURL = "";
+    if (attachment !== "") {
+      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const res = await uploadString(attachmentRef, attachment, "data_url");
+      attachmentURL = await getDownloadURL(res.ref);
+    }
+    const sweetObj = {
+      text: sweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentURL,
+    };
+    try {
+      await addDoc(collection(dbService, "sweets"), sweetObj);
+    } catch (err) {
+      console.log("Error adding document", err);
+    }
+    setSweet("");
+    setAttachment("");
   };
   const onChange = (e) => {
     setSweet(e.target.value);

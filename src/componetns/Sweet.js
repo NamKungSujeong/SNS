@@ -56,6 +56,14 @@ const Sweet = ({ sweetObj, isOwner }) => {
             {sweetObj.text}
             {format(sweetObj.createdAt, "ko")}
           </h4>
+          {sweetObj.attachmentURL && (
+            <img
+              src={sweetObj.attachmentURL}
+              alt="file"
+              width="50px"
+              height="50px"
+            />
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete</button>
