@@ -1,32 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { dbService } from "fbase";
+import { format, register } from "timeago.js";
+import koLocale from "timeago.js/lib/lang/ko";
 
-const Home = () => {
+register("ko", koLocale);
+
+const Home = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
   const [sweets, setSweets] = useState([]);
 
-  const getSweets = async () => {
-    const dbSweets = await getDocs(collection(dbService, "sweets"));
-    dbSweets.forEach((doc) => {
-      const sweetObject = {
-        ...doc.data(),
-        id: doc.id,
-      };
-      setSweets((prev) => [sweetObject, ...prev]);
-    });
-  };
-
   useEffect(() => {
-    getSweets();
+    const q = query(
+      collection(dbService, "sweets"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const sweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setSweets(sweetArr);
+    });
   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await addDoc(collection(dbService, "sweets"), {
-      text: sweet,
-      createdAt: Date.now(),
-    });
+    try {
+      await addDoc(collection(dbService, "sweets"), {
+        text: sweet,
+        createdAt: Date.now(),
+        creatorId: userObj.uid,
+      });
+    } catch (err) {
+      console.log("Error adding document", err);
+    }
     setSweet("");
   };
   const onChange = (e) => {
@@ -46,8 +60,11 @@ const Home = () => {
         />
         <input type="submit" value="send" onClick={onSubmit} />
       </form>
-      {sweets.reverse().map((sweet) => (
-        <div key={sweet.id}>{sweet.sweet}</div>
+      {sweets.map((sweet) => (
+        <div key={sweet.id}>
+          {sweet.text}
+          {format(sweet.createdAt, "ko")}
+        </div>
       ))}
     </div>
   );
