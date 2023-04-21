@@ -39,7 +39,6 @@ function App() {
       ) : (
         "로딩중..."
       )}
-      {/* <footer>&copy; {new Date().getFullYear()} Sujeong</footer> */}
     </>
   );
 }
