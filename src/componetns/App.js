@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AppRouter from "./Router";
 import { authService } from "../fbase";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import PropTypes from "prop-types";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,3 +45,13 @@ function App() {
 }
 
 export default App;
+
+App.propTypes = {
+  userObj: PropTypes.shape({
+    uid: PropTypes.string,
+    displayName: PropTypes.string,
+    email: PropTypes.string,
+    photoURL: PropTypes.string,
+  }),
+  isLoggedIn: PropTypes.bool,
+};

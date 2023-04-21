@@ -4,6 +4,7 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
+import PropTypes from "prop-types";
 
 register("ko", koLocale);
 
@@ -83,3 +84,13 @@ const Sweet = ({ sweetObj, isOwner }) => {
 };
 
 export default Sweet;
+
+Sweet.propTypes = {
+  sweetObj: PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+    attachmentURL: PropTypes.string,
+    createdAt: PropTypes.instanceOf(Date),
+  }),
+  isOwner: PropTypes.bool,
+};
