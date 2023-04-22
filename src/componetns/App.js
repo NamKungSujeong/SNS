@@ -4,6 +4,8 @@ import { authService } from "../fbase";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,6 +13,10 @@ function App() {
   const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
+    setTimeout(() => {
+      document.querySelector(".loading").style.opacity = 0;
+      document.querySelector(".loading").style.zIndex = -100;
+    }, 2000);
     onAuthStateChanged(authService, (user) => {
       if (user) {
         if (user.displayName == null) {
@@ -32,15 +38,44 @@ function App() {
   };
   return (
     <AppBlock>
-      {init ? (
-        <AppRouter
-          isLoggedIn={isLoggedIn}
-          userObj={userObj}
-          refreshUser={refreshUser}
-        />
-      ) : (
-        "로딩중..."
-      )}
+      <div
+        className="loading"
+        style={{
+          backgroundColor: "#04aaff",
+          width: "100%",
+          height: "100vh",
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 10,
+        }}
+      >
+        <FontAwesomeIcon icon={faTwitter} color={"white"} size="3x" beat />
+      </div>
+      <AppContainer>
+        <AppContent>
+          {init ? (
+            <AppRouter
+              isLoggedIn={isLoggedIn}
+              userObj={userObj}
+              refreshUser={refreshUser}
+            />
+          ) : (
+            <div
+              style={{
+                backgroundColor: "#04aaff",
+                width: "100%",
+                height: "100vh",
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            ></div>
+          )}
+        </AppContent>
+      </AppContainer>
     </AppBlock>
   );
 }
@@ -59,9 +94,22 @@ App.propTypes = {
 
 const AppBlock = styled.div`
   width: 100%;
-  max-width: 370px;
+  height: 100vh;
+  min-width: 370px;
+`;
+
+const AppContainer = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  margin: auto;
   justify-content: center;
+  align-items: center;
+`;
+
+const AppContent = styled.div`
+  width: 100%;
+  height: 660px;
+  max-width: 370px;
+  border: 1px solid black;
+  border-radius: 20px;
 `;

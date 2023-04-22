@@ -51,11 +51,11 @@ const Auth = () => {
 export default Auth;
 
 const LoginContainer = styled.div`
+  text-align: center;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   justify-content: center;
-  text-align: center;
 `;
 
 const SocialBtn = styled.button`
@@ -63,9 +63,12 @@ const SocialBtn = styled.button`
   padding: 10px 10px;
   border-radius: 20px;
   margin: 0 5px;
+  border: 1px solid #aaa;
 
   &:hover {
-    background-color: #dcd4d4;
+    border: 1px solid #04aaff;
+    background-color: #04aaff;
+    color: white;
   }
 `;
 

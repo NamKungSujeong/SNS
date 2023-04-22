@@ -3,6 +3,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
 import Sweet from "componetns/Sweet";
 import SweetFactory from "componetns/SweetFactory";
+import styled from "styled-components";
 
 const Home = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
@@ -22,7 +23,7 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <HomeContainer>
       <SweetFactory userObj={userObj} />
       {sweets.map((sweet) => (
         <Sweet
@@ -31,8 +32,15 @@ const Home = ({ userObj }) => {
           isOwner={sweet.creatorId === userObj.uid}
         />
       ))}
-    </div>
+    </HomeContainer>
   );
 };
 
 export default Home;
+
+const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+`;
