@@ -3,6 +3,7 @@ import AppRouter from "./Router";
 import { authService } from "../fbase";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,7 +31,7 @@ function App() {
     setUserObj(authService.currentUser);
   };
   return (
-    <>
+    <AppBlock>
       {init ? (
         <AppRouter
           isLoggedIn={isLoggedIn}
@@ -40,7 +41,7 @@ function App() {
       ) : (
         "로딩중..."
       )}
-    </>
+    </AppBlock>
   );
 }
 
@@ -55,3 +56,12 @@ App.propTypes = {
   }),
   isLoggedIn: PropTypes.bool,
 };
+
+const AppBlock = styled.div`
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+`;
