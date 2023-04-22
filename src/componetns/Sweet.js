@@ -41,7 +41,6 @@ const Sweet = ({ sweetObj, isOwner }) => {
   const onChange = (e) => {
     setNewSweet(e.target.value);
   };
-
   return (
     <div>
       {editing ? (
@@ -90,7 +89,7 @@ Sweet.propTypes = {
     id: PropTypes.string,
     text: PropTypes.string,
     attachmentURL: PropTypes.string,
-    createdAt: PropTypes.instanceOf(Date),
+    createdAt: PropTypes.number,
   }),
   isOwner: PropTypes.bool,
 };
