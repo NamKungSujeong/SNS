@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService, dbService } from "fbase";
-import { collection, where, query, getDocs, orderBy } from "firebase/firestore";
+import {
+  collection,
+  where,
+  query,
+  orderBy,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { signOut, updateProfile } from "firebase/auth";
 
 const Profile = ({ userObj, refreshUser }) => {
+  const [sweets, setSweets] = useState([]);
   const navigate = useNavigate();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -21,6 +30,12 @@ const Profile = ({ userObj, refreshUser }) => {
     e.preventDefault();
     if (userObj.displayName !== newDisplayName) {
       await updateProfile(userObj, { displayName: newDisplayName });
+      sweets.forEach((item) => {
+        const nameRef = doc(dbService, "sweets", `${item.id}`);
+        updateDoc(nameRef, {
+          displayName: newDisplayName,
+        });
+      });
     }
     refreshUser();
   };
@@ -32,9 +47,12 @@ const Profile = ({ userObj, refreshUser }) => {
         where("creatorId", "==", userObj.uid),
         orderBy("createdAt", "desc")
       );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
+      onSnapshot(q, (snapshot) => {
+        const sweetArr = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setSweets(sweetArr);
       });
     };
     getMySweets();
@@ -42,14 +60,18 @@ const Profile = ({ userObj, refreshUser }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
+        <div>{userObj.displayName}'s Profile</div>
         <input
           type="text"
           placeholder="Display Name"
           onChange={onChange}
           value={newDisplayName}
         />
-        <input type="submit" value="Update Profile" />
+        <button type="submit">Update Profile</button>
       </form>
+      {sweets.map((item) => (
+        <div key={item.id}>{item.text}</div>
+      ))}
       <button onClick={onLogoutClick}>log out</button>
     </>
   );

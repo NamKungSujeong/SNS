@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 register("ko", koLocale);
 
-const Sweet = ({ sweetObj, isOwner }) => {
+const Sweet = ({ sweetObj, isOwner, userObj }) => {
   const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
@@ -31,7 +31,6 @@ const Sweet = ({ sweetObj, isOwner }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(sweetObj, newSweet);
     await updateDoc(sweetRef, {
       text: newSweet,
     });
@@ -62,6 +61,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
             {sweetObj.text}
             {format(sweetObj.createdAt, "ko")}
           </h4>
+          <div>{sweetObj.displayName}</div>
           {sweetObj.attachmentURL && (
             <img
               src={sweetObj.attachmentURL}
@@ -89,6 +89,7 @@ Sweet.propTypes = {
     id: PropTypes.string,
     text: PropTypes.string,
     attachmentURL: PropTypes.string,
+    displayName: PropTypes.string,
     createdAt: PropTypes.number,
   }),
   isOwner: PropTypes.bool,

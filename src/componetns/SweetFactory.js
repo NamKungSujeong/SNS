@@ -20,6 +20,7 @@ const SweetFactory = ({ userObj }) => {
       text: sweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      displayName: userObj.displayName,
       attachmentURL,
     };
     try {

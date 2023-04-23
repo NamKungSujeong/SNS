@@ -9,7 +9,6 @@ const Navigation = ({ userObj }) => {
       <Ul>
         <ProfileLi>
           <Link to="/profile">
-            {/* {userObj.displayName}'s Profile */}
             <img src={user} alt="profile" style={{ width: "35px" }} />
           </Link>
         </ProfileLi>
