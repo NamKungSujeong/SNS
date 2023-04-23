@@ -12,10 +12,10 @@ import {
 } from "firebase/firestore";
 import { signOut, updateProfile } from "firebase/auth";
 
-const Profile = ({ userObj, refreshUser }) => {
+const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
-  const navigate = useNavigate();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+  const navigate = useNavigate();
 
   const onLogoutClick = () => {
     signOut(authService);
@@ -37,26 +37,23 @@ const Profile = ({ userObj, refreshUser }) => {
         });
       });
     }
-    refreshUser();
   };
 
   useEffect(() => {
-    const getMySweets = async () => {
-      const q = query(
-        collection(dbService, "sweets"),
-        where("creatorId", "==", userObj.uid),
-        orderBy("createdAt", "desc")
-      );
-      onSnapshot(q, (snapshot) => {
-        const sweetArr = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setSweets(sweetArr);
-      });
-    };
-    getMySweets();
-  }, [userObj.uid]);
+    const q = query(
+      collection(dbService, "sweets"),
+      where("creatorId", "==", userObj.uid),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const sweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setSweets(sweetArr);
+    });
+  }, [userObj.uid, userObj.displayName]);
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -70,7 +67,12 @@ const Profile = ({ userObj, refreshUser }) => {
         <button type="submit">Update Profile</button>
       </form>
       {sweets.map((item) => (
-        <div key={item.id}>{item.text}</div>
+        <div key={item.id}>
+          <div>{item.text}</div>
+          {item.attachmentURL && (
+            <img src={item.attachmentURL} alt="img" style={{ width: "50px" }} />
+          )}
+        </div>
       ))}
       <button onClick={onLogoutClick}>log out</button>
     </>

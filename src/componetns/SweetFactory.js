@@ -52,6 +52,7 @@ const SweetFactory = ({ userObj }) => {
   };
 
   const onClearAttachmentClick = () => setAttachment(null);
+
   return (
     <form onSubmit={onSubmit}>
       <input

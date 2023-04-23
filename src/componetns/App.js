@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AppRouter from "./Router";
 import { authService } from "../fbase";
-import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,10 +32,6 @@ function App() {
     });
   }, []);
 
-  const refreshUser = async () => {
-    await updateCurrentUser(authService, authService.currentUser);
-    setUserObj(authService.currentUser);
-  };
   return (
     <AppBlock>
       <div
@@ -56,11 +52,7 @@ function App() {
       <AppContainer>
         <AppContent>
           {init ? (
-            <AppRouter
-              isLoggedIn={isLoggedIn}
-              userObj={userObj}
-              refreshUser={refreshUser}
-            />
+            <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
           ) : (
             <div
               style={{

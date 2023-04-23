@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 register("ko", koLocale);
 
-const Sweet = ({ sweetObj, isOwner, userObj }) => {
+const Sweet = ({ sweetObj, isOwner }) => {
   const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
