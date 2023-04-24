@@ -23,7 +23,7 @@ export const Nav = styled.nav`
 export const ProfileImg = styled.img`
   width: 80px;
   height: 80px;
-  border: 1px solid black;
+  border: 3px solid white;
   border-radius: 50%;
   margin-bottom: 10px;
 `;

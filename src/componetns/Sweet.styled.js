@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SweetContainer = styled.div`
   border-bottom: 1px solid #aaa;
-  // border-radius: 10px;
   padding: 10px 5px;
   display: flex;
   &:hover {
@@ -27,7 +26,7 @@ export const SweetInfo = styled.div`
 export const ProfileImg = styled.img`
   width: 35px;
   height: 35px;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 50%;
 `;
 

@@ -19,7 +19,6 @@ export const Nav = styled.nav`
   background-color: white;
   display: flex;
   height: 70px;
-  // border-bottom: 1px solid #aaa;
 `;
 
 export const Ul = styled.ul`
@@ -31,7 +30,7 @@ export const Ul = styled.ul`
 export const ProfileLi = styled.li`
   img {
     border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid white;
     width: 40px;
     height: 40px;
   }
