@@ -1,11 +1,13 @@
-import React, { useNavigate } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService } from "fbase";
 import * as S from "./Navigation.styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = ({ userObj }) => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const onLogoutClick = () => {
     signOut(authService);
@@ -27,8 +29,12 @@ const Navigation = ({ userObj }) => {
         <S.HomeLi>
           <Link to="/">Home</Link>
         </S.HomeLi>
+        <li>
+          <button onClick={onLogoutClick}>
+            <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+          </button>
+        </li>
       </S.Ul>
-      <button onClick={onLogoutClick}>log out</button>
     </S.Nav>
   );
 };

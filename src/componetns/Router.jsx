@@ -4,6 +4,9 @@ import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
@@ -19,8 +22,26 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
           <Route path="/" element={<Auth />} />
         )}
       </Routes>
+      {isLoggedIn && (
+        <WriteButton>
+          <FontAwesomeIcon icon={faPenToSquare} size="xl" color="white" />
+        </WriteButton>
+      )}
     </BrowserRouter>
   );
 };
 
 export default AppRouter;
+
+const WriteButton = styled.div`
+  background-color: #04aaff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 80%;
+  cursor: pointer;
+`;

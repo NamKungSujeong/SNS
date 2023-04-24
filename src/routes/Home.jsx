@@ -24,15 +24,17 @@ const Home = ({ userObj }) => {
 
   return (
     <S.HomeContainer>
-      <SweetFactory userObj={userObj} />
-      {sweets.map((sweet) => (
-        <Sweet
-          key={sweet.id}
-          sweetObj={sweet}
-          isOwner={sweet.creatorId === userObj.uid}
-          userObj={userObj}
-        />
-      ))}
+      {/* <SweetFactory userObj={userObj} /> */}
+      <S.SweetContainer>
+        {sweets.map((sweet) => (
+          <Sweet
+            key={sweet.id}
+            sweetObj={sweet}
+            isOwner={sweet.creatorId === userObj.uid}
+            userObj={userObj}
+          />
+        ))}
+      </S.SweetContainer>
     </S.HomeContainer>
   );
 };

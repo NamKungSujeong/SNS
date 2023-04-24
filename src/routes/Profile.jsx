@@ -95,7 +95,7 @@ const Profile = ({ userObj }) => {
       )}
 
       <div>{userObj.displayName}'s Profile</div>
-      <form onSubmit={onSubmit}>
+      {/* <form onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Display Name"
@@ -104,14 +104,16 @@ const Profile = ({ userObj }) => {
         />
         <input type="file" onChange={onFileChange} />
         <button type="submit">Update Profile</button>
-      </form>
-      {sweets.map((sweet) => (
-        <Sweet
-          key={sweet.id}
-          sweetObj={sweet}
-          isOwner={sweet.creatorId === userObj.uid}
-        />
-      ))}
+      </form> */}
+      <S.SweetContainer>
+        {sweets.map((sweet) => (
+          <Sweet
+            key={sweet.id}
+            sweetObj={sweet}
+            isOwner={sweet.creatorId === userObj.uid}
+          />
+        ))}
+      </S.SweetContainer>
     </S.ProfileContainer>
   );
 };

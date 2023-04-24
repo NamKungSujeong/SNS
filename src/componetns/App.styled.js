@@ -19,5 +19,4 @@ export const AppContent = styled.div`
   height: 660px;
   max-width: 370px;
   border: 1px solid black;
-  overflow: scroll;
 `;

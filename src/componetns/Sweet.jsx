@@ -7,6 +7,8 @@ import koLocale from "timeago.js/lib/lang/ko";
 import PropTypes from "prop-types";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Sweet.styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 register("ko", koLocale);
 
@@ -66,43 +68,35 @@ const Sweet = ({ sweetObj, isOwner }) => {
           <button onClick={toggleEditing}>Cancle</button>
         </>
       ) : (
-        <S.SweetBlock>
-          <S.SweetInfo>
-            {sweetObj.profilePhoto ? (
-              <img
-                src={sweetObj.profilePhoto}
-                alt="profile"
-                style={{ width: "20px" }}
-              />
-            ) : (
-              <img
-                src={userInitPhoto}
-                alt="profile"
-                style={{ width: "20px" }}
-              />
+        <S.SweetContainer>
+          {sweetObj.profilePhoto ? (
+            <S.ProfileImg src={sweetObj.profilePhoto} alt="profile" />
+          ) : (
+            <S.ProfileImg src={userInitPhoto} alt="profile" />
+          )}
+          <S.SweetBlock>
+            <S.SweetInfo>
+              <S.DisplayNameSpan>{sweetObj.displayName}</S.DisplayNameSpan>
+              <S.CreatedAtSpan>
+                {format(sweetObj.createdAt, "ko")}
+              </S.CreatedAtSpan>
+            </S.SweetInfo>
+            <S.SweerText>{sweetObj.text}</S.SweerText>
+            {sweetObj.attachmentURL && (
+              <S.SweetImg src={sweetObj.attachmentURL} alt="file" />
             )}
-            <S.DisplayNameSpan>{sweetObj.displayName}</S.DisplayNameSpan>
-            <S.CreatedAtSpan>
-              {" "}
-              {format(sweetObj.createdAt, "ko")}
-            </S.CreatedAtSpan>
-          </S.SweetInfo>
-          <h4>{sweetObj.text}</h4>
-          {sweetObj.attachmentURL && (
-            <img
-              src={sweetObj.attachmentURL}
-              alt="file"
-              width="50px"
-              height="50px"
-            />
-          )}
-          {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete</button>
-              <button onClick={toggleEditing}>Edit</button>
-            </>
-          )}
-        </S.SweetBlock>
+            {isOwner && (
+              <S.SweetBtns>
+                <button onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faPen} />
+                </button>
+                <button onClick={onDeleteClick}>
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </button>
+              </S.SweetBtns>
+            )}
+          </S.SweetBlock>
+        </S.SweetContainer>
       )}
     </div>
   );

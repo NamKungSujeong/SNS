@@ -8,3 +8,8 @@ export const HomeContainer = styled.div`
   margin: auto;
   margin-top: 100px;
 `;
+
+export const SweetContainer = styled.div`
+  height: 490px;
+  overflow: scroll;
+`;
