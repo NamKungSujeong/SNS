@@ -30,7 +30,6 @@ const Home = ({ userObj }) => {
           key={sweet.id}
           sweetObj={sweet}
           isOwner={sweet.creatorId === userObj.uid}
-          userObj={userObj}
         />
       ))}
     </HomeContainer>

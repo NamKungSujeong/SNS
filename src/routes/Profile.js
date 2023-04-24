@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { signOut, updateProfile } from "firebase/auth";
+import Sweet from "componetns/Sweet";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
@@ -66,13 +67,12 @@ const Profile = ({ userObj }) => {
         />
         <button type="submit">Update Profile</button>
       </form>
-      {sweets.map((item) => (
-        <div key={item.id}>
-          <div>{item.text}</div>
-          {item.attachmentURL && (
-            <img src={item.attachmentURL} alt="img" style={{ width: "50px" }} />
-          )}
-        </div>
+      {sweets.map((sweet) => (
+        <Sweet
+          key={sweet.id}
+          sweetObj={sweet}
+          isOwner={sweet.creatorId === userObj.uid}
+        />
       ))}
       <button onClick={onLogoutClick}>log out</button>
     </>
