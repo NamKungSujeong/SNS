@@ -103,5 +103,5 @@ const AppContent = styled.div`
   height: 660px;
   max-width: 370px;
   border: 1px solid black;
-  border-radius: 20px;
+  overflow: scroll;
 `;

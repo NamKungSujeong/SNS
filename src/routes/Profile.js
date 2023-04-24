@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import {
   collection,
   where,
@@ -10,33 +9,65 @@ import {
   onSnapshot,
   updateDoc,
 } from "firebase/firestore";
-import { signOut, updateProfile } from "firebase/auth";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
+import { updateProfile } from "firebase/auth";
 import Sweet from "componetns/Sweet";
+import styled from "styled-components";
+import userInitPhoto from "../asset/user.png";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const navigate = useNavigate();
-
-  const onLogoutClick = () => {
-    signOut(authService);
-    navigate("/");
-  };
+  const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
 
   const onChange = (e) => {
     setNewDisplayName(e.target.value);
   };
 
+  const onFileChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setNewPhoto(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (userObj.displayName !== newDisplayName) {
-      await updateProfile(userObj, { displayName: newDisplayName });
+    let photoURL = userObj.photoURL;
+    if (newPhoto !== userObj.photoURL) {
+      const photoRef = ref(
+        storageService,
+        `${userObj.uid}/profile/${uuidv4()}`
+      );
+      const res = await uploadString(photoRef, newPhoto, "data_url");
+      photoURL = await getDownloadURL(res.ref);
+    }
+
+    if (
+      userObj.displayName !== newDisplayName ||
+      userObj.photoURL !== newPhoto
+    ) {
+      await updateProfile(userObj, {
+        displayName: newDisplayName,
+        photoURL,
+      });
       sweets.forEach((item) => {
         const nameRef = doc(dbService, "sweets", `${item.id}`);
         updateDoc(nameRef, {
           displayName: newDisplayName,
+          profilePhoto: photoURL,
         });
       });
+      setNewPhoto(photoURL);
     }
   };
 
@@ -53,18 +84,25 @@ const Profile = ({ userObj }) => {
       }));
       setSweets(sweetArr);
     });
-  }, [userObj.uid, userObj.displayName]);
+  }, [userObj.uid, userObj.displayName, userObj.photoURL]);
 
   return (
-    <>
+    <ProfileContainer>
+      {userObj.photoURL ? (
+        <img src={userObj.photoURL} alt="profile" style={{ width: "50px" }} />
+      ) : (
+        <img src={userInitPhoto} alt="profile" style={{ width: "50px" }} />
+      )}
+
+      <div>{userObj.displayName}'s Profile</div>
       <form onSubmit={onSubmit}>
-        <div>{userObj.displayName}'s Profile</div>
         <input
           type="text"
           placeholder="Display Name"
           onChange={onChange}
           value={newDisplayName}
         />
+        <input type="file" onChange={onFileChange} />
         <button type="submit">Update Profile</button>
       </form>
       {sweets.map((sweet) => (
@@ -74,9 +112,12 @@ const Profile = ({ userObj }) => {
           isOwner={sweet.creatorId === userObj.uid}
         />
       ))}
-      <button onClick={onLogoutClick}>log out</button>
-    </>
+    </ProfileContainer>
   );
 };
 
 export default Profile;
+
+const ProfileContainer = styled.div`
+  margin-top: 100px;
+`;

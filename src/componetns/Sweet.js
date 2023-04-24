@@ -5,6 +5,8 @@ import { deleteObject, ref } from "firebase/storage";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 import PropTypes from "prop-types";
+import userInitPhoto from "../asset/user.png";
+import styled from "styled-components";
 
 register("ko", koLocale);
 
@@ -53,15 +55,36 @@ const Sweet = ({ sweetObj, isOwner }) => {
             />
             <input type="submit" value="Update" />
           </form>
+          {sweetObj.attachmentURL && (
+            <img
+              src={sweetObj.attachmentURL}
+              alt="file"
+              width="50px"
+              height="50px"
+            />
+          )}
           <button onClick={toggleEditing}>Cancle</button>
         </>
       ) : (
-        <>
-          <h4>
-            {sweetObj.text}
-            {format(sweetObj.createdAt, "ko")}
-          </h4>
-          <div>{sweetObj.displayName}</div>
+        <SweetBlock>
+          <SweetInfo>
+            {sweetObj.profilePhoto ? (
+              <img
+                src={sweetObj.profilePhoto}
+                alt="profile"
+                style={{ width: "20px" }}
+              />
+            ) : (
+              <img
+                src={userInitPhoto}
+                alt="profile"
+                style={{ width: "20px" }}
+              />
+            )}
+            <DisplayNameSpan>{sweetObj.displayName}</DisplayNameSpan>
+            <CreatedAtSpan> {format(sweetObj.createdAt, "ko")}</CreatedAtSpan>
+          </SweetInfo>
+          <h4>{sweetObj.text}</h4>
           {sweetObj.attachmentURL && (
             <img
               src={sweetObj.attachmentURL}
@@ -76,7 +99,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
               <button onClick={toggleEditing}>Edit</button>
             </>
           )}
-        </>
+        </SweetBlock>
       )}
     </div>
   );
@@ -94,3 +117,24 @@ Sweet.propTypes = {
   }),
   isOwner: PropTypes.bool,
 };
+
+const SweetBlock = styled.div`
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px 0;
+`;
+
+const DisplayNameSpan = styled.span`
+  font-weight: 500;
+  font-size: 1rem;
+`;
+
+const CreatedAtSpan = styled.span`
+  color: #aaa;
+  margin-left: 10px;
+`;
+
+const SweetInfo = styled.div`
+  margin-bottom: 10px;
+`;

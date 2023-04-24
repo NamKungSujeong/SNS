@@ -21,6 +21,7 @@ const SweetFactory = ({ userObj }) => {
       createdAt: Date.now(),
       creatorId: userObj.uid,
       displayName: userObj.displayName,
+      profilePhoto: userObj.photoURL,
       attachmentURL,
     };
     try {

@@ -30,6 +30,7 @@ const Home = ({ userObj }) => {
           key={sweet.id}
           sweetObj={sweet}
           isOwner={sweet.creatorId === userObj.uid}
+          userObj={userObj}
         />
       ))}
     </HomeContainer>
@@ -43,4 +44,6 @@ const HomeContainer = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 320px;
+  margin: auto;
+  margin-top: 100px;
 `;
