@@ -11,6 +11,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [init, setInin] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [isWrite, setIsWrite] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,6 +30,7 @@ function App() {
         setIsLoggedIn(false);
       }
       setInin(true);
+      setIsWrite(false);
     });
   }, []);
 
@@ -52,19 +54,15 @@ function App() {
       <S.AppContainer>
         <S.AppContent>
           {init ? (
-            <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+            <>
+              <AppRouter
+                isLoggedIn={isLoggedIn}
+                userObj={userObj}
+                isWrite={isWrite}
+              />
+            </>
           ) : (
-            <div
-              style={{
-                backgroundColor: "#04aaff",
-                width: "100%",
-                height: "100vh",
-                position: "absolute",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            ></div>
+            <div>로딩중...</div>
           )}
         </S.AppContent>
       </S.AppContainer>

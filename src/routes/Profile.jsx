@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dbService, storageService } from "fbase";
+import { dbService, storageService, authService } from "fbase";
 import {
   collection,
   where,
@@ -11,15 +11,27 @@ import {
 } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, signOut } from "firebase/auth";
 import Sweet from "componetns/Sweet";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRightFromBracket,
+  faCircleLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    signOut(authService);
+    navigate("/");
+  };
 
   const onChange = (e) => {
     setNewDisplayName(e.target.value);
@@ -88,13 +100,37 @@ const Profile = ({ userObj }) => {
 
   return (
     <S.ProfileContainer>
-      {userObj.photoURL ? (
-        <img src={userObj.photoURL} alt="profile" style={{ width: "50px" }} />
-      ) : (
-        <img src={userInitPhoto} alt="profile" style={{ width: "50px" }} />
-      )}
-
-      <div>{userObj.displayName}'s Profile</div>
+      <S.Nav>
+        <li>
+          <Link to="/">
+            <FontAwesomeIcon icon={faCircleLeft} size="xl" />
+          </Link>
+        </li>
+        <li>
+          <button onClick={onLogoutClick}>
+            <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+          </button>
+        </li>
+      </S.Nav>
+      <S.UserProfile>
+        <S.UpdateBtn>
+          <button>프로필 변경</button>
+        </S.UpdateBtn>
+        {userObj.photoURL ? (
+          <S.ProfileImg
+            src={userObj.photoURL}
+            alt="profile"
+            style={{ width: "80px" }}
+          />
+        ) : (
+          <S.ProfileImg
+            src={userInitPhoto}
+            alt="profile"
+            style={{ width: "80px" }}
+          />
+        )}
+        <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+      </S.UserProfile>
       {/* <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -106,6 +142,7 @@ const Profile = ({ userObj }) => {
         <button type="submit">Update Profile</button>
       </form> */}
       <S.SweetContainer>
+        <span>My sweets</span>
         {sweets.map((sweet) => (
           <Sweet
             key={sweet.id}

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const SweetContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 5px 0;
+  border-bottom: 1px solid #aaa;
+  // border-radius: 10px;
+  padding: 10px 5px;
   display: flex;
+  &:hover {
+    background-color: #dedede;
+  }
 `;
 
 export const DisplayNameSpan = styled.span`

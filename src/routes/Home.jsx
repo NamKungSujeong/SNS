@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
 import Sweet from "componetns/Sweet";
-import SweetFactory from "componetns/SweetFactory";
+// import Navigation from "componetns/Navigation";
+import { Link } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+// import SweetFactory from "routes/SweetFactory";
 import * as S from "./Home.styled";
 
 const Home = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
+  // console.log(isWrite);
 
   useEffect(() => {
     const q = query(
@@ -25,6 +31,18 @@ const Home = ({ userObj }) => {
   return (
     <S.HomeContainer>
       {/* <SweetFactory userObj={userObj} /> */}
+      <S.Nav>
+        <S.Ul>
+          <S.ProfileLi>
+            <Link to="/profile">
+              <img src={userObj.photoURL} alt="profile" />
+            </Link>
+          </S.ProfileLi>
+          <S.HomeLi>
+            <Link to="/">Home</Link>
+          </S.HomeLi>
+        </S.Ul>
+      </S.Nav>
       <S.SweetContainer>
         {sweets.map((sweet) => (
           <Sweet
