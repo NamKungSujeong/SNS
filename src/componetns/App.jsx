@@ -3,9 +3,9 @@ import AppRouter from "./Router";
 import { authService } from "../fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import * as S from "./App.styled";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <AppBlock>
+    <S.AppBlock>
       <div
         className="loading"
         style={{
@@ -49,8 +49,8 @@ function App() {
       >
         <FontAwesomeIcon icon={faTwitter} color={"white"} size="3x" beat />
       </div>
-      <AppContainer>
-        <AppContent>
+      <S.AppContainer>
+        <S.AppContent>
           {init ? (
             <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
           ) : (
@@ -66,9 +66,9 @@ function App() {
               }}
             ></div>
           )}
-        </AppContent>
-      </AppContainer>
-    </AppBlock>
+        </S.AppContent>
+      </S.AppContainer>
+    </S.AppBlock>
   );
 }
 
@@ -83,25 +83,3 @@ App.propTypes = {
   }),
   isLoggedIn: PropTypes.bool,
 };
-
-const AppBlock = styled.div`
-  width: 100%;
-  height: 100vh;
-  min-width: 370px;
-`;
-
-const AppContainer = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const AppContent = styled.div`
-  width: 100%;
-  height: 660px;
-  max-width: 370px;
-  border: 1px solid black;
-  overflow: scroll;
-`;

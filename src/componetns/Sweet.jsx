@@ -6,7 +6,7 @@ import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 import PropTypes from "prop-types";
 import userInitPhoto from "../asset/user.png";
-import styled from "styled-components";
+import * as S from "./Sweet.styled";
 
 register("ko", koLocale);
 
@@ -66,8 +66,8 @@ const Sweet = ({ sweetObj, isOwner }) => {
           <button onClick={toggleEditing}>Cancle</button>
         </>
       ) : (
-        <SweetBlock>
-          <SweetInfo>
+        <S.SweetBlock>
+          <S.SweetInfo>
             {sweetObj.profilePhoto ? (
               <img
                 src={sweetObj.profilePhoto}
@@ -81,9 +81,12 @@ const Sweet = ({ sweetObj, isOwner }) => {
                 style={{ width: "20px" }}
               />
             )}
-            <DisplayNameSpan>{sweetObj.displayName}</DisplayNameSpan>
-            <CreatedAtSpan> {format(sweetObj.createdAt, "ko")}</CreatedAtSpan>
-          </SweetInfo>
+            <S.DisplayNameSpan>{sweetObj.displayName}</S.DisplayNameSpan>
+            <S.CreatedAtSpan>
+              {" "}
+              {format(sweetObj.createdAt, "ko")}
+            </S.CreatedAtSpan>
+          </S.SweetInfo>
           <h4>{sweetObj.text}</h4>
           {sweetObj.attachmentURL && (
             <img
@@ -99,7 +102,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
               <button onClick={toggleEditing}>Edit</button>
             </>
           )}
-        </SweetBlock>
+        </S.SweetBlock>
       )}
     </div>
   );
@@ -117,24 +120,3 @@ Sweet.propTypes = {
   }),
   isOwner: PropTypes.bool,
 };
-
-const SweetBlock = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 5px 0;
-`;
-
-const DisplayNameSpan = styled.span`
-  font-weight: 500;
-  font-size: 1rem;
-`;
-
-const CreatedAtSpan = styled.span`
-  color: #aaa;
-  margin-left: 10px;
-`;
-
-const SweetInfo = styled.div`
-  margin-bottom: 10px;
-`;

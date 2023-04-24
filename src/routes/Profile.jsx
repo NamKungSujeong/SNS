@@ -13,8 +13,8 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { updateProfile } from "firebase/auth";
 import Sweet from "componetns/Sweet";
-import styled from "styled-components";
 import userInitPhoto from "../asset/user.png";
+import * as S from "./Profile.styled";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
@@ -87,7 +87,7 @@ const Profile = ({ userObj }) => {
   }, [userObj.uid, userObj.displayName, userObj.photoURL]);
 
   return (
-    <ProfileContainer>
+    <S.ProfileContainer>
       {userObj.photoURL ? (
         <img src={userObj.photoURL} alt="profile" style={{ width: "50px" }} />
       ) : (
@@ -112,12 +112,8 @@ const Profile = ({ userObj }) => {
           isOwner={sweet.creatorId === userObj.uid}
         />
       ))}
-    </ProfileContainer>
+    </S.ProfileContainer>
   );
 };
 
 export default Profile;
-
-const ProfileContainer = styled.div`
-  margin-top: 100px;
-`;
