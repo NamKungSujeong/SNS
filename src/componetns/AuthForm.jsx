@@ -9,7 +9,7 @@ import * as S from "./AuthForm.styled";
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [errorPw, setErrorPw] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 

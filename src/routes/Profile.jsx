@@ -18,6 +18,7 @@ import {
   faCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import ProfileUpdate from "componetns/ProfileUpdate";
+import WriteBtn from "componetns/WriteBtn";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
@@ -37,7 +38,7 @@ const Profile = ({ userObj }) => {
       }));
       setSweets(sweetArr);
     });
-  }, [userObj.uid, userObj.displayName, userObj.photoURL]);
+  }, [userObj.uid, userObj.displayName]);
 
   const onLogoutClick = () => {
     signOut(authService);
@@ -45,12 +46,12 @@ const Profile = ({ userObj }) => {
   };
 
   const onEditClick = () => {
-    setIsEditing(true);
+    setIsEditing((prev) => !prev);
   };
 
-  const closeEditClick = () => {
-    setIsEditing(false);
-  };
+  // const closeEditClick = () => {
+  //   setIsEditing(false);
+  // };
 
   return (
     <S.ProfileContainer>
@@ -99,9 +100,10 @@ const Profile = ({ userObj }) => {
         <ProfileUpdate
           userObj={userObj}
           sweets={sweets}
-          closeEditClick={closeEditClick}
+          onEditClick={onEditClick}
         />
       )}
+      <WriteBtn />
     </S.ProfileContainer>
   );
 };

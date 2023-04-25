@@ -9,7 +9,7 @@ import * as S from "./ProfileUpdate.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
-const ProfileUpdate = ({ userObj, sweets, closeEditClick }) => {
+const ProfileUpdate = ({ userObj, sweets, onEditClick }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
 
@@ -61,13 +61,13 @@ const ProfileUpdate = ({ userObj, sweets, closeEditClick }) => {
       });
       setNewPhoto(photoURL);
     }
-    closeEditClick();
+    onEditClick();
   };
 
   return (
     <S.ModalContainer>
       <S.ModalContent>
-        <S.CloseBtn onClick={closeEditClick}>X</S.CloseBtn>
+        <S.CloseBtn onClick={onEditClick}>X</S.CloseBtn>
         <S.UpdateProfileForm onSubmit={onSubmit}>
           <S.FileLabel htmlFor="file">
             {newPhoto ? (

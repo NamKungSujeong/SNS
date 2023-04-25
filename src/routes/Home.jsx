@@ -5,6 +5,7 @@ import Sweet from "componetns/Sweet";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
 import userInitPhoto from "../asset/user.png";
+import WriteBtn from "componetns/WriteBtn";
 
 const Home = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);
@@ -52,6 +53,7 @@ const Home = ({ userObj }) => {
           />
         ))}
       </S.SweetContainer>
+      <WriteBtn />
     </S.HomeContainer>
   );
 };

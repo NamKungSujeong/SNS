@@ -41,3 +41,7 @@ button {
 .hidden {
   display: none;
 }
+
+svg {
+  cursor: pointer;
+}
