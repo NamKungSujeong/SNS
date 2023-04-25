@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./write.styled";
 
-const SweetFactory = ({ userObj }) => {
+const Write = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const navigate = useNavigate();
@@ -109,4 +109,4 @@ const SweetFactory = ({ userObj }) => {
     </S.WriteContainer>
   );
 };
-export default SweetFactory;
+export default Write;
