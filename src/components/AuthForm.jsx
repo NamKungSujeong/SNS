@@ -67,11 +67,24 @@ const AuthForm = () => {
   return (
     <S.FormSection>
       <S.Form onSubmit={handleSubmit}>
-        <InputEmail email={email} handleInputChange={handleInputChange} />
+        <S.InputUser
+          name="email"
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={handleInputChange}
+          autoFocus
+          required
+        />
         <S.ErrorMsg>{errorEmail}</S.ErrorMsg>
-        <InputPassword
-          password={password}
-          handleInputChange={handleInputChange}
+        <S.InputUser
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handleInputChange}
+          required
+          autoComplete="on"
         />
         <S.ErrorMsg>{errorPw}</S.ErrorMsg>
         <S.InputSubmit type="submit">
@@ -86,35 +99,3 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
-
-const InputEmail = ({ email, handleInputChange }) => {
-  return (
-    <>
-      <S.InputUser
-        name="email"
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={handleInputChange}
-        autoFocus
-        required
-      />
-    </>
-  );
-};
-
-const InputPassword = ({ password, handleInputChange }) => {
-  return (
-    <>
-      <S.InputUser
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={handleInputChange}
-        required
-        autoComplete="on"
-      />
-    </>
-  );
-};

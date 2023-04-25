@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const Modal = ({ props }) => {
+const Modal = ({ children }) => {
   return (
     <ModalContainer>
-      <ModalContent>{props}</ModalContent>
+      <ModalContent>{children}</ModalContent>
     </ModalContainer>
   );
 };

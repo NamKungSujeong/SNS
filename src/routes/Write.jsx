@@ -104,7 +104,6 @@ const FileInput = ({ handleAttachmentChange }) => {
         id="file"
         accept="image/*"
         onChange={handleAttachmentChange}
-        style={{ display: "none" }}
       />
     </>
   );

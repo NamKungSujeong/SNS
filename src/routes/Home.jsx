@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
-import Sweet from "components/Sweet";
+import Sweet from "components/Sweet/Sweet";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
 import userInitPhoto from "../asset/user.png";

@@ -8,7 +8,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { signOut } from "firebase/auth";
-import Sweet from "components/Sweet";
+import Sweet from "components/Sweet/Sweet";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -95,24 +95,13 @@ const Nav = ({ handleLogoutClick }) => {
 };
 
 const UserProfile = ({ handleEditClick, userObj }) => {
+  const imgSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.UserProfile>
       <S.UpdateBtn>
         <button onClick={handleEditClick}>프로필 변경</button>
       </S.UpdateBtn>
-      {userObj.photoURL ? (
-        <S.ProfileImg
-          src={userObj.photoURL}
-          alt="profile"
-          style={{ width: "80px" }}
-        />
-      ) : (
-        <S.ProfileImg
-          src={userInitPhoto}
-          alt="profile"
-          style={{ width: "80px" }}
-        />
-      )}
+      <S.ProfileImg src={imgSrc} alt="profile" />
       <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
     </S.UserProfile>
   );

@@ -48,70 +48,43 @@ const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
         displayName: newDisplayName,
         photoURL,
       });
-      sweets.forEach(async (item) => {
-        const nameRef = doc(dbService, "sweets", `${item.id}`);
-        await updateDoc(nameRef, {
-          displayName: newDisplayName,
-          profilePhoto: photoURL,
-        });
-      });
+      await Promise.all(
+        sweets.map(async (item) => {
+          const nameRef = doc(dbService, "sweets", `${item.id}`);
+          await updateDoc(nameRef, {
+            displayName: newDisplayName,
+            profilePhoto: photoURL,
+          });
+        })
+      );
       setNewPhoto(photoURL);
     }
     handleEditClick();
   };
 
+  const imgSrc = newPhoto || userInitPhoto;
+
   return (
-    <Modal
-      props={
-        <>
-          <S.CloseBtn onClick={handleEditClick}>X</S.CloseBtn>
-          <S.UpdateProfileForm onSubmit={handleSubmit}>
-            <FileInput
-              newPhoto={newPhoto}
-              handlePhotoChange={handlePhotoChange}
-            />
-            <S.DisplayNameInput
-              type="text"
-              placeholder="Display Name"
-              onChange={handleDisplayNameChange}
-              value={newDisplayName}
-            />
-            <S.UpdateBtn type="submit">Update</S.UpdateBtn>
-          </S.UpdateProfileForm>
-        </>
-      }
-    />
+    <Modal>
+      <S.CloseBtn onClick={handleEditClick}>X</S.CloseBtn>
+      <S.UpdateProfileForm onSubmit={handleSubmit}>
+        <S.FileLabel htmlFor="file">
+          <img src={imgSrc} alt="profile" />
+          <div>
+            <FontAwesomeIcon icon={faImage} />
+          </div>
+        </S.FileLabel>
+        <input type="file" id="file" onChange={handlePhotoChange} />
+        <S.DisplayNameInput
+          type="text"
+          placeholder="Display Name"
+          onChange={handleDisplayNameChange}
+          value={newDisplayName}
+        />
+        <S.UpdateBtn type="submit">Update</S.UpdateBtn>
+      </S.UpdateProfileForm>
+    </Modal>
   );
 };
 
 export default ProfileUpdate;
-
-const FileInput = ({ newPhoto, handlePhotoChange }) => {
-  return (
-    <>
-      <S.FileLabel htmlFor="file">
-        {newPhoto ? (
-          <>
-            <img src={newPhoto} alt="profile" />
-            <div>
-              <FontAwesomeIcon icon={faImage} />
-            </div>
-          </>
-        ) : (
-          <>
-            <img src={userInitPhoto} alt="profile" />
-            <div>
-              <FontAwesomeIcon icon={faImage} size="2xl" />
-            </div>
-          </>
-        )}
-      </S.FileLabel>
-      <input
-        type="file"
-        id="file"
-        onChange={handlePhotoChange}
-        style={{ display: "none" }}
-      />
-    </>
-  );
-};
