@@ -8,7 +8,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { signOut } from "firebase/auth";
-import Sweet from "componetns/Sweet";
+import Sweet from "components/Sweet";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,8 +17,8 @@ import {
   faRightFromBracket,
   faCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import ProfileUpdate from "componetns/ProfileUpdate";
-import WriteBtn from "componetns/WriteBtn";
+import ProfileUpdate from "components/ProfileUpdate";
+import WriteBtn from "components/WriteBtn";
 
 const Profile = ({ userObj }) => {
   const [sweets, setSweets] = useState([]);

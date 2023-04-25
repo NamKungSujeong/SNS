@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import { dbService, storageService } from "fbase";
 
-import * as S from "./write.styled";
+import * as S from "./Write.styled";
 
 const Write = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
