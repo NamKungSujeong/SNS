@@ -9,15 +9,14 @@ export const HomeContainer = styled.section`
 `;
 
 export const SweetContainer = styled.div`
-  height: 490px;
+  height: 520px;
   overflow: scroll;
   width: 100%;
   max-width: 320px;
-  margin: 100px auto auto;
+  margin: auto;
 `;
 
 export const Nav = styled.nav`
-  position: fixed;
   background-color: white;
   display: flex;
   height: 70px;

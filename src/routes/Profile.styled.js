@@ -15,7 +15,7 @@ export const SweetContainer = styled.section`
 
 export const Nav = styled.nav`
   display: flex;
-  height: 70px;
+  height: 60px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -42,11 +42,11 @@ export const UserProfile = styled.section`
 
 export const UpdateBtn = styled.div`
   text-align: end;
+  position: relative;
+  top: 25px;
 
   button {
     text-align: right;
-    position: relative;
-    top: 25px;
     padding: 5px 10px;
     border-radius: 10px;
 

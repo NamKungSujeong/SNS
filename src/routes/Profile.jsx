@@ -53,8 +53,8 @@ const Profile = ({ userObj }) => {
     <S.ProfileContainer>
       <Nav handleLogoutClick={handleLogoutClick} />
       <UserProfile userObj={userObj} handleEditClick={handleEditClick} />
+      <span>{sweets.length} sweets</span>
       <S.SweetContainer>
-        <span>{sweets.length} sweets</span>
         {sweets.map((sweet) => (
           <Sweet
             key={sweet.id}
