@@ -1,26 +1,5 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.div`
-  position: fixed;
-  display: flex;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 20;
-`;
-
-export const ModalContent = styled.div`
-  width: 100%;
-  max-width: 320px;
-  height: 400px;
-  background-color: white;
-  border-radius: 20px;
-`;
-
 export const UpdateProfileForm = styled.form`
   display: flex;
   flex-direction: column;

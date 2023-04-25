@@ -9,6 +9,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./ProfileUpdate.styled";
 import userInitPhoto from "../asset/user.png";
+import Modal from "./Modal";
 
 const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
@@ -60,24 +61,26 @@ const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
   };
 
   return (
-    <S.ModalContainer>
-      <S.ModalContent>
-        <S.CloseBtn onClick={handleEditClick}>X</S.CloseBtn>
-        <S.UpdateProfileForm onSubmit={handleSubmit}>
-          <FileInput
-            newPhoto={newPhoto}
-            handlePhotoChange={handlePhotoChange}
-          />
-          <S.DisplayNameInput
-            type="text"
-            placeholder="Display Name"
-            onChange={handleDisplayNameChange}
-            value={newDisplayName}
-          />
-          <S.UpdateBtn type="submit">Update</S.UpdateBtn>
-        </S.UpdateProfileForm>
-      </S.ModalContent>
-    </S.ModalContainer>
+    <Modal
+      props={
+        <>
+          <S.CloseBtn onClick={handleEditClick}>X</S.CloseBtn>
+          <S.UpdateProfileForm onSubmit={handleSubmit}>
+            <FileInput
+              newPhoto={newPhoto}
+              handlePhotoChange={handlePhotoChange}
+            />
+            <S.DisplayNameInput
+              type="text"
+              placeholder="Display Name"
+              onChange={handleDisplayNameChange}
+              value={newDisplayName}
+            />
+            <S.UpdateBtn type="submit">Update</S.UpdateBtn>
+          </S.UpdateProfileForm>
+        </>
+      }
+    />
   );
 };
 

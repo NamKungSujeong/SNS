@@ -77,7 +77,7 @@ const Profile = ({ userObj }) => {
 
 export default Profile;
 
-const Nav = ({ onLogoutClick }) => {
+const Nav = ({ handleLogoutClick }) => {
   return (
     <S.Nav>
       <li>
@@ -86,7 +86,7 @@ const Nav = ({ onLogoutClick }) => {
         </Link>
       </li>
       <li>
-        <button onClick={onLogoutClick}>
+        <button onClick={handleLogoutClick}>
           <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
         </button>
       </li>
@@ -94,11 +94,11 @@ const Nav = ({ onLogoutClick }) => {
   );
 };
 
-const UserProfile = ({ onEditClick, userObj }) => {
+const UserProfile = ({ handleEditClick, userObj }) => {
   return (
     <S.UserProfile>
       <S.UpdateBtn>
-        <button onClick={onEditClick}>프로필 변경</button>
+        <button onClick={handleEditClick}>프로필 변경</button>
       </S.UpdateBtn>
       {userObj.photoURL ? (
         <S.ProfileImg

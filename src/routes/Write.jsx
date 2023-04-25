@@ -93,7 +93,7 @@ const Write = ({ userObj }) => {
 };
 export default Write;
 
-const FileInput = ({ onFileChange }) => {
+const FileInput = ({ handleAttachmentChange }) => {
   return (
     <>
       <label htmlFor="file">
@@ -103,19 +103,19 @@ const FileInput = ({ onFileChange }) => {
         type="file"
         id="file"
         accept="image/*"
-        onChange={onFileChange}
+        onChange={handleAttachmentChange}
         style={{ display: "none" }}
       />
     </>
   );
 };
 
-const Attachment = ({ attachment, onClearAttachmentClick }) => {
+export const Attachment = ({ attachment, handleClearAttachmentClick }) => {
   return (
     <>
       {attachment && (
         <div>
-          <S.ClearBtn onClick={onClearAttachmentClick}>
+          <S.ClearBtn onClick={handleClearAttachmentClick}>
             <FontAwesomeIcon icon={faCircleXmark} size="xl" />
           </S.ClearBtn>
           <img src={attachment} alt="attachment" width="100%" height="200px" />

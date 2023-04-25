@@ -4,6 +4,7 @@ export const AppBlock = styled.div`
   width: 100%;
   height: 100vh;
   min-width: 370px;
+  background-color: #d6d5d5;
 `;
 
 export const AppContainer = styled.div`
@@ -14,9 +15,10 @@ export const AppContainer = styled.div`
   align-items: center;
 `;
 
-export const AppContent = styled.div`
+export const AppContent = styled.main`
   width: 100%;
   height: 660px;
   max-width: 370px;
-  border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
 `;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,7 +8,7 @@ export const ProfileContainer = styled.div`
   margin: auto;
 `;
 
-export const SweetContainer = styled.div`
+export const SweetContainer = styled.section`
   height: 365px;
   overflow: scroll;
 `;
@@ -28,7 +28,7 @@ export const ProfileImg = styled.img`
   margin-bottom: 10px;
 `;
 
-export const UserDisplayName = styled.span`
+export const UserDisplayName = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   margin-left: 10px;
