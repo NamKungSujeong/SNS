@@ -1,9 +1,11 @@
-import { authService } from "fbase";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+import { authService } from "fbase";
+
 import * as S from "./AuthForm.styled";
 
 const AuthForm = () => {
@@ -16,7 +18,7 @@ const AuthForm = () => {
   let exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.com+/;
 
   // 회원가입/로그인
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (newAccount) {
@@ -35,7 +37,7 @@ const AuthForm = () => {
     }
   };
 
-  const onChange = (e) => {
+  const handleInputChange = (e) => {
     const {
       target: { name, value },
     } = e;
@@ -55,42 +57,28 @@ const AuthForm = () => {
     }
   };
 
+  const handleToggleClick = () => {
+    setNewAccount((prev) => !prev);
+    setEmail("");
+    setPassword("");
+    setErrorPw("");
+    setErrorEmail("");
+  };
   return (
     <S.FormSection>
-      <S.Form onSubmit={onSubmit}>
-        <S.InputUser
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={onChange}
-          autoFocus
-          required
-        />
+      <S.Form onSubmit={handleSubmit}>
+        <InputEmail email={email} handleInputChange={handleInputChange} />
         <S.ErrorMsg>{errorEmail}</S.ErrorMsg>
-        <S.InputUser
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={onChange}
-          required
-          autoComplete="on"
+        <InputPassword
+          password={password}
+          handleInputChange={handleInputChange}
         />
         <S.ErrorMsg>{errorPw}</S.ErrorMsg>
         <S.InputSubmit type="submit">
           {newAccount ? "회원가입" : "로그인"}
         </S.InputSubmit>
       </S.Form>
-      <S.ToggleClickBtn
-        onClick={() => {
-          setNewAccount((prev) => !prev);
-          setEmail("");
-          setPassword("");
-          setErrorPw("");
-          setErrorEmail("");
-        }}
-      >
+      <S.ToggleClickBtn onClick={handleToggleClick}>
         {newAccount ? "로그인" : "회원가입"}
       </S.ToggleClickBtn>
     </S.FormSection>
@@ -98,3 +86,35 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
+
+const InputEmail = ({ email, handleInputChange }) => {
+  return (
+    <>
+      <S.InputUser
+        name="email"
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={handleInputChange}
+        autoFocus
+        required
+      />
+    </>
+  );
+};
+
+const InputPassword = ({ password, handleInputChange }) => {
+  return (
+    <>
+      <S.InputUser
+        name="password"
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={handleInputChange}
+        required
+        autoComplete="on"
+      />
+    </>
+  );
+};

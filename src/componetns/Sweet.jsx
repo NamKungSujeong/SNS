@@ -17,7 +17,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
 
-  const onDeleteClick = async () => {
+  const handleDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠습니까?");
 
     if (ok) {
@@ -29,11 +29,11 @@ const Sweet = ({ sweetObj, isOwner }) => {
     }
   };
 
-  const toggleEditing = () => {
+  const handleToggleEditingClick = () => {
     setEditing((prev) => !prev);
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await updateDoc(sweetRef, {
       text: newSweet,
@@ -41,19 +41,19 @@ const Sweet = ({ sweetObj, isOwner }) => {
     setEditing(false);
   };
 
-  const onChange = (e) => {
+  const handleSweetChange = (e) => {
     setNewSweet(e.target.value);
   };
   return (
     <div>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit}>
             <input
               value={newSweet}
               placeholder="Edit"
               required
-              onChange={onChange}
+              onChange={handleSweetChange}
             />
             <input type="submit" value="Update" />
           </form>
@@ -65,7 +65,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
               height="50px"
             />
           )}
-          <button onClick={toggleEditing}>Cancle</button>
+          <button onClick={handleToggleEditingClick}>Cancle</button>
         </>
       ) : (
         <S.SweetContainer>
@@ -87,10 +87,10 @@ const Sweet = ({ sweetObj, isOwner }) => {
             )}
             {isOwner && (
               <S.SweetBtns>
-                <button onClick={toggleEditing}>
+                <button onClick={handleToggleEditingClick}>
                   <FontAwesomeIcon icon={faPen} />
                 </button>
-                <button onClick={onDeleteClick}>
+                <button onClick={handleDeleteClick}>
                   <FontAwesomeIcon icon={faTrashCan} />
                 </button>
               </S.SweetBtns>

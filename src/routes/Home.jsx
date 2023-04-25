@@ -26,7 +26,6 @@ const Home = ({ userObj }) => {
 
   return (
     <S.HomeContainer>
-      {/* <SweetFactory userObj={userObj} /> */}
       <S.Nav>
         <S.Ul>
           <S.ProfileLi>

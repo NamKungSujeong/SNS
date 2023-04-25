@@ -38,54 +38,21 @@ const Profile = ({ userObj }) => {
       }));
       setSweets(sweetArr);
     });
-  }, [userObj.uid, userObj.displayName]);
+  }, [userObj.uid, userObj.displayName, userObj.photoURL]);
 
-  const onLogoutClick = () => {
+  const handleLogoutClick = () => {
     signOut(authService);
     navigate("/");
   };
 
-  const onEditClick = () => {
+  const handleEditClick = () => {
     setIsEditing((prev) => !prev);
   };
 
-  // const closeEditClick = () => {
-  //   setIsEditing(false);
-  // };
-
   return (
     <S.ProfileContainer>
-      <S.Nav>
-        <li>
-          <Link to="/">
-            <FontAwesomeIcon icon={faCircleLeft} size="xl" />
-          </Link>
-        </li>
-        <li>
-          <button onClick={onLogoutClick}>
-            <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
-          </button>
-        </li>
-      </S.Nav>
-      <S.UserProfile>
-        <S.UpdateBtn>
-          <button onClick={onEditClick}>프로필 변경</button>
-        </S.UpdateBtn>
-        {userObj.photoURL ? (
-          <S.ProfileImg
-            src={userObj.photoURL}
-            alt="profile"
-            style={{ width: "80px" }}
-          />
-        ) : (
-          <S.ProfileImg
-            src={userInitPhoto}
-            alt="profile"
-            style={{ width: "80px" }}
-          />
-        )}
-        <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
-      </S.UserProfile>
+      <Nav handleLogoutClick={handleLogoutClick} />
+      <UserProfile userObj={userObj} handleEditClick={handleEditClick} />
       <S.SweetContainer>
         <span>{sweets.length} sweets</span>
         {sweets.map((sweet) => (
@@ -100,7 +67,7 @@ const Profile = ({ userObj }) => {
         <ProfileUpdate
           userObj={userObj}
           sweets={sweets}
-          onEditClick={onEditClick}
+          handleEditClick={handleEditClick}
         />
       )}
       <WriteBtn />
@@ -109,3 +76,44 @@ const Profile = ({ userObj }) => {
 };
 
 export default Profile;
+
+const Nav = ({ onLogoutClick }) => {
+  return (
+    <S.Nav>
+      <li>
+        <Link to="/">
+          <FontAwesomeIcon icon={faCircleLeft} size="xl" />
+        </Link>
+      </li>
+      <li>
+        <button onClick={onLogoutClick}>
+          <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+        </button>
+      </li>
+    </S.Nav>
+  );
+};
+
+const UserProfile = ({ onEditClick, userObj }) => {
+  return (
+    <S.UserProfile>
+      <S.UpdateBtn>
+        <button onClick={onEditClick}>프로필 변경</button>
+      </S.UpdateBtn>
+      {userObj.photoURL ? (
+        <S.ProfileImg
+          src={userObj.photoURL}
+          alt="profile"
+          style={{ width: "80px" }}
+        />
+      ) : (
+        <S.ProfileImg
+          src={userInitPhoto}
+          alt="profile"
+          style={{ width: "80px" }}
+        />
+      )}
+      <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+    </S.UserProfile>
+  );
+};

@@ -36,21 +36,7 @@ function App() {
 
   return (
     <S.AppBlock>
-      <div
-        className="loading"
-        style={{
-          backgroundColor: "#04aaff",
-          width: "100%",
-          height: "100vh",
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-      >
-        <FontAwesomeIcon icon={faTwitter} color={"white"} size="3x" beat />
-      </div>
+      <Loading />
       <S.AppContainer>
         <S.AppContent>
           {init ? (
@@ -80,4 +66,24 @@ App.propTypes = {
     photoURL: PropTypes.string,
   }),
   isLoggedIn: PropTypes.bool,
+};
+
+const Loading = () => {
+  return (
+    <div
+      className="loading"
+      style={{
+        backgroundColor: "#04aaff",
+        width: "100%",
+        height: "100vh",
+        position: "absolute",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 10,
+      }}
+    >
+      <FontAwesomeIcon icon={faTwitter} color={"white"} size="3x" beat />
+    </div>
+  );
 };

@@ -15,7 +15,7 @@ import {
 import * as S from "./Auth.styled";
 
 const Auth = () => {
-  const onSocialClick = async (e) => {
+  const handleSocialClick = async (e) => {
     const {
       target: { name },
     } = e;
@@ -38,10 +38,10 @@ const Auth = () => {
       />
       <AuthForm />
       <S.SocialBtnBlock>
-        <S.SocialBtn name="google" onClick={onSocialClick}>
+        <S.SocialBtn name="google" onClick={handleSocialClick}>
           Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </S.SocialBtn>
-        <S.SocialBtn name="github" onClick={onSocialClick}>
+        <S.SocialBtn name="github" onClick={handleSocialClick}>
           Continue with Github <FontAwesomeIcon icon={faGithub} />
         </S.SocialBtn>
       </S.SocialBtnBlock>
