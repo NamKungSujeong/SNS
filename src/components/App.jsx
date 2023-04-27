@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import AppRouter from "./Router";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Home from "../routes/Home";
+import Auth from "../routes/Auth";
+import Profile from "routes/Profile";
+import SweetFactory from "routes/Write";
 import { authService } from "../fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import PropTypes from "prop-types";
@@ -11,7 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [init, setInin] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [isWrite, setIsWrite] = useState(false);
+  const [testId, setTestId] = useState({ id: "", url: "", displayName: "" });
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,9 +34,18 @@ function App() {
         setIsLoggedIn(false);
       }
       setInin(true);
-      setIsWrite(false);
+      // setTestId({
+      //   id: user.uid,
+      //   url: user.photoURL,
+      //   displayName: user.displayName,
+      // });
     });
+    // console.log(testId);
   }, []);
+
+  const test4 = (dataId, dataProfile, dataName) => {
+    setTestId({ id: dataId, url: dataProfile, displayName: dataName });
+  };
 
   return (
     <S.AppBlock>
@@ -41,11 +54,39 @@ function App() {
         <S.AppContent>
           {init ? (
             <>
-              <AppRouter
+              <BrowserRouter>
+                <Routes>
+                  {isLoggedIn ? (
+                    <>
+                      <Route
+                        path="/"
+                        element={<Home userObj={userObj} test4={test4} />}
+                      />
+                      <Route
+                        path="/profile"
+                        element={
+                          <Profile
+                            userObj={userObj}
+                            testId={testId}
+                            test4={test4}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/write"
+                        element={<SweetFactory userObj={userObj} />}
+                      />
+                    </>
+                  ) : (
+                    <Route path="/" element={<Auth />} />
+                  )}
+                </Routes>
+              </BrowserRouter>
+              {/* <AppRouter
                 isLoggedIn={isLoggedIn}
                 userObj={userObj}
-                isWrite={isWrite}
-              />
+                test4={test4}
+              /> */}
             </>
           ) : (
             <div>로딩중...</div>

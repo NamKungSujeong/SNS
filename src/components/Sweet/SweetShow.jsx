@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
+import { Link } from "react-router-dom";
 
 register("ko", koLocale);
 
@@ -12,12 +13,19 @@ const SweetShow = ({
   isOwner,
   handleToggleEditingClick,
   handleDeleteClick,
+  test2,
 }) => {
   const imgSrc = sweetObj.profilePhoto || userInitPhoto;
 
+  const test = () => {
+    test2(sweetObj.creatorId, sweetObj.profilePhoto, sweetObj.displayName);
+  };
+
   return (
     <S.SweetContent>
-      <S.ProfileImg src={imgSrc} alt="profile" />
+      <Link to="/profile">
+        <S.ProfileImg src={imgSrc} alt="profile" onClick={test} />
+      </Link>
       <S.SweetBlock>
         <S.SweetInfo>
           <S.DisplayName>{sweetObj.displayName}</S.DisplayName>

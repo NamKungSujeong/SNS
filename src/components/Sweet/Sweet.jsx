@@ -8,11 +8,12 @@ import Modal from "../Modal";
 import SweetEdit from "./SweetEdit";
 import SweetShow from "./SweetShow";
 
-const Sweet = ({ sweetObj, isOwner }) => {
+const Sweet = ({ sweetObj, isOwner, test3 }) => {
   const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
   const [attachment, setAttachment] = useState(sweetObj.attachmentURL);
+  // const [testId, setTestId] = useState("");
 
   const handleDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠습니까?");
@@ -55,6 +56,10 @@ const Sweet = ({ sweetObj, isOwner }) => {
 
   const handleClearAttachmentClick = () => setAttachment(null);
 
+  const test2 = (dataId, dataProfile, dataName) => {
+    test3(dataId, dataProfile, dataName);
+  };
+
   return (
     <div>
       {editing ? (
@@ -76,6 +81,7 @@ const Sweet = ({ sweetObj, isOwner }) => {
           isOwner={isOwner}
           handleToggleEditingClick={handleToggleEditingClick}
           handleDeleteClick={handleDeleteClick}
+          test2={test2}
         />
       )}
     </div>

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
 import Sweet from "components/Sweet/Sweet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./Home.styled";
 import userInitPhoto from "../asset/user.png";
 import WriteBtn from "components/WriteBtn";
 
-const Home = ({ userObj }) => {
+const Home = ({ userObj, test4 }) => {
   const [sweets, setSweets] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const q = query(
@@ -22,11 +23,20 @@ const Home = ({ userObj }) => {
       }));
       setSweets(sweetArr);
     });
+    // console.log(testId);
   }, []);
 
+  const test3 = (dataId, dataProfile, dataName) => {
+    test4(dataId, dataProfile, dataName);
+  };
+
+  const moveProfile = () => {
+    test4(userObj.uid, userObj.photoURL, userObj.displayName);
+    navigate("/profile");
+  };
   return (
     <S.HomeContainer>
-      <Nav userObj={userObj} />
+      <Nav userObj={userObj} moveProfile={moveProfile} />
       <S.SweetContainer>
         {sweets.map((sweet) => (
           <Sweet
@@ -34,6 +44,7 @@ const Home = ({ userObj }) => {
             sweetObj={sweet}
             isOwner={sweet.creatorId === userObj.uid}
             userObj={userObj}
+            test3={test3}
           />
         ))}
       </S.SweetContainer>
@@ -44,18 +55,15 @@ const Home = ({ userObj }) => {
 
 export default Home;
 
-const Nav = ({ userObj }) => {
+const Nav = ({ userObj, moveProfile }) => {
+  const imgSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.Nav>
       <S.Ul>
         <S.ProfileLi>
-          <Link to="/profile">
-            {userObj.photoURL ? (
-              <img src={userObj.photoURL} alt="profile" />
-            ) : (
-              <img src={userInitPhoto} alt="profile" />
-            )}
-          </Link>
+          <div onClick={moveProfile}>
+            <img src={imgSrc} alt="profile" />
+          </div>
         </S.ProfileLi>
         <S.HomeLi>
           <Link to="/">Home</Link>

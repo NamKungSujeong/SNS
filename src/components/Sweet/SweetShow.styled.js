@@ -42,7 +42,6 @@ export const SweerText = styled.p`
 
 export const SweetImg = styled.img`
   width: 100%;
-  height: 150px;
 `;
 
 export const SweetBtns = styled.div`

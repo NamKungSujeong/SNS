@@ -20,7 +20,7 @@ import {
 import ProfileUpdate from "components/ProfileUpdate";
 import WriteBtn from "components/WriteBtn";
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, testId }) => {
   const [sweets, setSweets] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Profile = ({ userObj }) => {
   useEffect(() => {
     const q = query(
       collection(dbService, "sweets"),
-      where("creatorId", "==", userObj.uid),
+      where("creatorId", "==", testId.id),
       orderBy("createdAt", "desc")
     );
     onSnapshot(q, (snapshot) => {
@@ -38,7 +38,8 @@ const Profile = ({ userObj }) => {
       }));
       setSweets(sweetArr);
     });
-  }, [userObj.uid, userObj.displayName, userObj.photoURL]);
+    // console.log(testId);
+  }, [userObj.uid, userObj.displayName, userObj.photoURL, testId]);
 
   const handleLogoutClick = () => {
     signOut(authService);
@@ -52,7 +53,12 @@ const Profile = ({ userObj }) => {
   return (
     <S.ProfileContainer>
       <Nav handleLogoutClick={handleLogoutClick} />
-      <UserProfile userObj={userObj} handleEditClick={handleEditClick} />
+      <UserProfile
+        userObj={userObj}
+        handleEditClick={handleEditClick}
+        testId={testId}
+        isOwner={testId.id === userObj.uid}
+      />
       <span>{sweets.length} sweets</span>
       <S.SweetContainer>
         {sweets.map((sweet) => (
@@ -60,6 +66,7 @@ const Profile = ({ userObj }) => {
             key={sweet.id}
             sweetObj={sweet}
             isOwner={sweet.creatorId === userObj.uid}
+            // test3={test3}
           />
         ))}
       </S.SweetContainer>
@@ -94,15 +101,17 @@ const Nav = ({ handleLogoutClick }) => {
   );
 };
 
-const UserProfile = ({ handleEditClick, userObj }) => {
-  const imgSrc = userObj.photoURL || userInitPhoto;
+const UserProfile = ({ handleEditClick, userObj, testId, isOwner }) => {
+  const imgSrc = testId.url || userInitPhoto;
   return (
     <S.UserProfile>
-      <S.UpdateBtn>
-        <button onClick={handleEditClick}>프로필 변경</button>
-      </S.UpdateBtn>
+      {isOwner && (
+        <S.UpdateBtn>
+          <button onClick={handleEditClick}>프로필 변경</button>
+        </S.UpdateBtn>
+      )}
       <S.ProfileImg src={imgSrc} alt="profile" />
-      <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+      <S.UserDisplayName>{testId.displayName}</S.UserDisplayName>
     </S.UserProfile>
   );
 };
