@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import Profile from "routes/Profile";
@@ -34,13 +34,12 @@ function App() {
         setIsLoggedIn(false);
       }
       setInin(true);
-      // setTestId({
-      //   id: user.uid,
-      //   url: user.photoURL,
-      //   displayName: user.displayName,
-      // });
+      setTestId({
+        id: user.uid,
+        url: user.photoURL,
+        displayName: user.displayName,
+      });
     });
-    // console.log(testId);
   }, []);
 
   const test4 = (dataId, dataProfile, dataName) => {
@@ -54,7 +53,7 @@ function App() {
         <S.AppContent>
           {init ? (
             <>
-              <BrowserRouter>
+              <HashRouter>
                 <Routes>
                   {isLoggedIn ? (
                     <>
@@ -81,7 +80,7 @@ function App() {
                     <Route path="/" element={<Auth />} />
                   )}
                 </Routes>
-              </BrowserRouter>
+              </HashRouter>
               {/* <AppRouter
                 isLoggedIn={isLoggedIn}
                 userObj={userObj}
