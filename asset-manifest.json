@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/switter/static/css/main.f5e62f9d.css",
+    "main.js": "/switter/static/js/main.f7e20141.js",
+    "static/media/user.png": "/switter/static/media/user.0d14c6999b4a5c8e86a7.png",
+    "index.html": "/switter/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.f5e62f9d.css",
+    "static/js/main.f7e20141.js"
+  ]
+}
