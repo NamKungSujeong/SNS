@@ -13,18 +13,18 @@ const SweetShow = ({
   isOwner,
   handleToggleEditingClick,
   handleDeleteClick,
-  test2,
+  propsSweet,
 }) => {
   const imgSrc = sweetObj.profilePhoto || userInitPhoto;
 
-  const test = () => {
-    test2(sweetObj.creatorId, sweetObj.profilePhoto, sweetObj.displayName);
+  const onProfilelClick = () => {
+    propsSweet(sweetObj.creatorId, sweetObj.profilePhoto, sweetObj.displayName);
   };
 
   return (
     <S.SweetContent>
       <Link to="/profile">
-        <S.ProfileImg src={imgSrc} alt="profile" onClick={test} />
+        <S.ProfileImg src={imgSrc} alt="profile" onClick={onProfilelClick} />
       </Link>
       <S.SweetBlock>
         <S.SweetInfo>

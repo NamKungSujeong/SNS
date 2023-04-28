@@ -15,7 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [init, setInin] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [testId, setTestId] = useState({ id: "", url: "", displayName: "" });
+  const [creator, setcreator] = useState({ id: "", url: "", displayName: "" });
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,20 +30,20 @@ function App() {
         }
         setIsLoggedIn(true);
         setUserObj(user);
+        setcreator({
+          id: user.uid,
+          url: user.photoURL,
+          displayName: user.displayName,
+        });
       } else {
         setIsLoggedIn(false);
       }
       setInin(true);
-      setTestId({
-        id: user.uid,
-        url: user.photoURL,
-        displayName: user.displayName,
-      });
     });
   }, []);
 
-  const test4 = (dataId, dataProfile, dataName) => {
-    setTestId({ id: dataId, url: dataProfile, displayName: dataName });
+  const propsApp = (dataId, dataProfile, dataName) => {
+    setcreator({ id: dataId, url: dataProfile, displayName: dataName });
   };
 
   return (
@@ -59,16 +59,12 @@ function App() {
                     <>
                       <Route
                         path="/"
-                        element={<Home userObj={userObj} test4={test4} />}
+                        element={<Home userObj={userObj} propsApp={propsApp} />}
                       />
                       <Route
                         path="/profile"
                         element={
-                          <Profile
-                            userObj={userObj}
-                            testId={testId}
-                            test4={test4}
-                          />
+                          <Profile userObj={userObj} creator={creator} />
                         }
                       />
                       <Route

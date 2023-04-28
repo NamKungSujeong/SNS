@@ -20,7 +20,7 @@ import {
 import ProfileUpdate from "components/ProfileUpdate";
 import WriteBtn from "components/WriteBtn";
 
-const Profile = ({ userObj, testId }) => {
+const Profile = ({ userObj, creator }) => {
   const [sweets, setSweets] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Profile = ({ userObj, testId }) => {
   useEffect(() => {
     const q = query(
       collection(dbService, "sweets"),
-      where("creatorId", "==", testId.id),
+      where("creatorId", "==", creator.id),
       orderBy("createdAt", "desc")
     );
     onSnapshot(q, (snapshot) => {
@@ -39,7 +39,14 @@ const Profile = ({ userObj, testId }) => {
       setSweets(sweetArr);
     });
     // console.log(testId);
-  }, [userObj.uid, userObj.displayName, userObj.photoURL, testId]);
+  }, [
+    userObj.uid,
+    userObj.displayName,
+    userObj.photoURL,
+    creator.id,
+    creator.url,
+    creator.displayName,
+  ]);
 
   const handleLogoutClick = () => {
     signOut(authService);
@@ -56,8 +63,8 @@ const Profile = ({ userObj, testId }) => {
       <UserProfile
         userObj={userObj}
         handleEditClick={handleEditClick}
-        testId={testId}
-        isOwner={testId.id === userObj.uid}
+        testId={creator}
+        isOwner={creator.id === userObj.uid}
       />
       <span>{sweets.length} sweets</span>
       <S.SweetContainer>

@@ -7,7 +7,7 @@ import * as S from "./Home.styled";
 import userInitPhoto from "../asset/user.png";
 import WriteBtn from "components/WriteBtn";
 
-const Home = ({ userObj, test4 }) => {
+const Home = ({ userObj, propsApp }) => {
   const [sweets, setSweets] = useState([]);
   const navigate = useNavigate();
 
@@ -26,12 +26,12 @@ const Home = ({ userObj, test4 }) => {
     // console.log(testId);
   }, []);
 
-  const test3 = (dataId, dataProfile, dataName) => {
-    test4(dataId, dataProfile, dataName);
+  const propsHome = (dataId, dataProfile, dataName) => {
+    propsApp(dataId, dataProfile, dataName);
   };
 
   const moveProfile = () => {
-    test4(userObj.uid, userObj.photoURL, userObj.displayName);
+    propsApp(userObj.uid, userObj.photoURL, userObj.displayName);
     navigate("/profile");
   };
   return (
@@ -44,7 +44,7 @@ const Home = ({ userObj, test4 }) => {
             sweetObj={sweet}
             isOwner={sweet.creatorId === userObj.uid}
             userObj={userObj}
-            test3={test3}
+            propsHome={propsHome}
           />
         ))}
       </S.SweetContainer>
