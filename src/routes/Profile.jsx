@@ -38,7 +38,6 @@ const Profile = ({ userObj, creator }) => {
       }));
       setSweets(sweetArr);
     });
-    // console.log(testId);
   }, [
     userObj.uid,
     userObj.displayName,
@@ -63,7 +62,7 @@ const Profile = ({ userObj, creator }) => {
       <UserProfile
         userObj={userObj}
         handleEditClick={handleEditClick}
-        testId={creator}
+        creator={creator}
         isOwner={creator.id === userObj.uid}
       />
       <span>{sweets.length} sweets</span>
@@ -73,7 +72,6 @@ const Profile = ({ userObj, creator }) => {
             key={sweet.id}
             sweetObj={sweet}
             isOwner={sweet.creatorId === userObj.uid}
-            // test3={test3}
           />
         ))}
       </S.SweetContainer>
@@ -108,17 +106,25 @@ const Nav = ({ handleLogoutClick }) => {
   );
 };
 
-const UserProfile = ({ handleEditClick, userObj, testId, isOwner }) => {
-  const imgSrc = testId.url || userInitPhoto;
+const UserProfile = ({ handleEditClick, userObj, creator, isOwner }) => {
+  const imgSrc = creator.url || userInitPhoto;
+  const ownerSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.UserProfile>
-      {isOwner && (
-        <S.UpdateBtn>
-          <button onClick={handleEditClick}>프로필 변경</button>
-        </S.UpdateBtn>
+      {isOwner ? (
+        <>
+          <S.UpdateBtn>
+            <button onClick={handleEditClick}>프로필 변경</button>
+          </S.UpdateBtn>
+          <S.ProfileImg src={ownerSrc} alt="profile" />
+          <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+        </>
+      ) : (
+        <>
+          <S.ProfileImg src={imgSrc} alt="profile" />
+          <S.UserDisplayName>{creator.displayName}</S.UserDisplayName>
+        </>
       )}
-      <S.ProfileImg src={imgSrc} alt="profile" />
-      <S.UserDisplayName>{testId.displayName}</S.UserDisplayName>
     </S.UserProfile>
   );
 };
