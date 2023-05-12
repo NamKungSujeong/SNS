@@ -13,7 +13,6 @@ const Sweet = ({ sweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
   const [attachment, setAttachment] = useState(sweetObj.attachmentURL);
-  // const [testId, setTestId] = useState("");
 
   const handleDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠습니까?");

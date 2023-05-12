@@ -30,7 +30,6 @@ const Home = () => {
       }));
       setSweets(sweetArr);
     });
-    // console.log(testId);
   }, []);
 
   const moveProfile = () => {

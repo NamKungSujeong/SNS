@@ -18,11 +18,6 @@ const AuthProvider = ({ children }) => {
         }
         setIsLoggedIn(true);
         setUserObj(user);
-        // setcreator({
-        //   id: user.uid,
-        //   url: user.photoURL,
-        //   displayName: user.displayName,
-        // });
       } else {
         setIsLoggedIn(false);
       }
