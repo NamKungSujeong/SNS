@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { dbService, authService } from "fbase";
 import {
   collection,
@@ -19,11 +19,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ProfileUpdate from "components/ProfileUpdate";
 import WriteBtn from "components/WriteBtn";
+import { AuthContext } from "contexts/AuthProvider";
+import { SweetContext } from "contexts/SweetProvider";
 
-const Profile = ({ userObj, creator }) => {
+const Profile = () => {
   const [sweets, setSweets] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+
+  const authConsumer = useContext(AuthContext);
+  const { userObj } = authConsumer;
+  const sweetConsumer = useContext(SweetContext);
+  const { creator } = sweetConsumer;
 
   useEffect(() => {
     const q = query(

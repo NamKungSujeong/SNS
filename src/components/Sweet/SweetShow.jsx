@@ -5,6 +5,8 @@ import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { SweetContext } from "contexts/SweetProvider";
 
 register("ko", koLocale);
 
@@ -13,18 +15,24 @@ const SweetShow = ({
   isOwner,
   handleToggleEditingClick,
   handleDeleteClick,
-  propsSweet,
 }) => {
+  const sweetConsumer = useContext(SweetContext);
+  const { setCreator } = sweetConsumer;
+
   const imgSrc = sweetObj.profilePhoto || userInitPhoto;
 
-  const onProfilelClick = () => {
-    propsSweet(sweetObj.creatorId, sweetObj.profilePhoto, sweetObj.displayName);
+  const onProfileClick = () => {
+    setCreator({
+      id: sweetObj.creatorId,
+      url: sweetObj.profilePhoto,
+      displayName: sweetObj.displayName,
+    });
   };
 
   return (
     <S.SweetContent>
       <Link to="/profile">
-        <S.ProfileImg src={imgSrc} alt="profile" onClick={onProfilelClick} />
+        <S.ProfileImg src={imgSrc} alt="profile" onClick={onProfileClick} />
       </Link>
       <S.SweetBlock>
         <S.SweetInfo>

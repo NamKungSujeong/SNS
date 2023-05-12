@@ -2,8 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import "./index.css";
-// import { firebase } from "./fbase";
-// console.log(firebase);
+import { AuthProvider } from "contexts/AuthProvider";
+import { SweetProvider } from "contexts/SweetProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <AuthProvider>
+    <SweetProvider>
+      <App />
+    </SweetProvider>
+  </AuthProvider>
+);

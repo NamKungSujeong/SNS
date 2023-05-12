@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,15 +9,18 @@ import {
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "contexts/AuthProvider";
 
 import { dbService, storageService } from "fbase";
 
 import * as S from "./Write.styled";
 
-const Write = ({ userObj }) => {
+const Write = () => {
   const [sweet, setSweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const navigate = useNavigate();
+  const authConsumer = useContext(AuthContext);
+  const { userObj } = authConsumer;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

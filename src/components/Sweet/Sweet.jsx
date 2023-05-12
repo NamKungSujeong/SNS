@@ -8,7 +8,7 @@ import Modal from "../Modal";
 import SweetEdit from "./SweetEdit";
 import SweetShow from "./SweetShow";
 
-const Sweet = ({ sweetObj, isOwner, propsHome }) => {
+const Sweet = ({ sweetObj, isOwner }) => {
   const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);
   const [editing, setEditing] = useState(false);
   const [newSweet, setNewSweet] = useState(sweetObj.text);
@@ -56,10 +56,6 @@ const Sweet = ({ sweetObj, isOwner, propsHome }) => {
 
   const handleClearAttachmentClick = () => setAttachment(null);
 
-  const propsSweet = (dataId, dataProfile, dataName) => {
-    propsHome(dataId, dataProfile, dataName);
-  };
-
   return (
     <div>
       {editing ? (
@@ -81,7 +77,6 @@ const Sweet = ({ sweetObj, isOwner, propsHome }) => {
           isOwner={isOwner}
           handleToggleEditingClick={handleToggleEditingClick}
           handleDeleteClick={handleDeleteClick}
-          propsSweet={propsSweet}
         />
       )}
     </div>

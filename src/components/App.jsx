@@ -1,50 +1,21 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, HashRouter } from "react-router-dom";
-import Home from "../routes/Home";
-import Auth from "../routes/Auth";
-import Profile from "routes/Profile";
-import SweetFactory from "routes/Write";
-import { authService } from "../fbase";
-import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useContext } from "react";
+import AppRouter from "./Router";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import * as S from "./App.styled";
+import { AuthContext } from "../contexts/AuthProvider";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [init, setInin] = useState(false);
-  const [userObj, setUserObj] = useState(null);
-  const [creator, setcreator] = useState({ id: "", url: "", displayName: "" });
-
   useEffect(() => {
     setTimeout(() => {
       document.querySelector(".loading").style.opacity = 0;
       document.querySelector(".loading").style.zIndex = -100;
     }, 2000);
-    onAuthStateChanged(authService, (user) => {
-      if (user) {
-        if (user.displayName == null) {
-          const userName = user.email.split("@")[0];
-          user.displayName = userName;
-        }
-        setIsLoggedIn(true);
-        setUserObj(user);
-        setcreator({
-          id: user.uid,
-          url: user.photoURL,
-          displayName: user.displayName,
-        });
-      } else {
-        setIsLoggedIn(false);
-      }
-      setInin(true);
-    });
   }, []);
 
-  const propsApp = (dataId, dataProfile, dataName) => {
-    setcreator({ id: dataId, url: dataProfile, displayName: dataName });
-  };
+  const authConsumer = useContext(AuthContext);
+  const { init } = authConsumer;
 
   return (
     <S.AppBlock>
@@ -53,35 +24,7 @@ function App() {
         <S.AppContent>
           {init ? (
             <>
-              <HashRouter>
-                <Routes>
-                  {isLoggedIn ? (
-                    <>
-                      <Route
-                        path="/"
-                        element={<Home userObj={userObj} propsApp={propsApp} />}
-                      />
-                      <Route
-                        path="/profile"
-                        element={
-                          <Profile userObj={userObj} creator={creator} />
-                        }
-                      />
-                      <Route
-                        path="/write"
-                        element={<SweetFactory userObj={userObj} />}
-                      />
-                    </>
-                  ) : (
-                    <Route path="/" element={<Auth />} />
-                  )}
-                </Routes>
-              </HashRouter>
-              {/* <AppRouter
-                isLoggedIn={isLoggedIn}
-                userObj={userObj}
-                test4={test4}
-              /> */}
+              <AppRouter />
             </>
           ) : (
             <div>로딩중...</div>

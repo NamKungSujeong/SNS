@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
 import Sweet from "components/Sweet/Sweet";
@@ -6,10 +6,17 @@ import { Link, useNavigate } from "react-router-dom";
 import * as S from "./Home.styled";
 import userInitPhoto from "../asset/user.png";
 import WriteBtn from "components/WriteBtn";
+import { AuthContext } from "contexts/AuthProvider";
+import { SweetContext } from "contexts/SweetProvider";
 
-const Home = ({ userObj, propsApp }) => {
+const Home = () => {
   const [sweets, setSweets] = useState([]);
   const navigate = useNavigate();
+
+  const authConsumer = useContext(AuthContext);
+  const { userObj } = authConsumer;
+  const sweetConsumer = useContext(SweetContext);
+  const { setCreator } = sweetConsumer;
 
   useEffect(() => {
     const q = query(
@@ -26,12 +33,12 @@ const Home = ({ userObj, propsApp }) => {
     // console.log(testId);
   }, []);
 
-  const propsHome = (dataId, dataProfile, dataName) => {
-    propsApp(dataId, dataProfile, dataName);
-  };
-
   const moveProfile = () => {
-    propsApp(userObj.uid, userObj.photoURL, userObj.displayName);
+    setCreator({
+      id: userObj.uid,
+      url: userObj.profilePhoto,
+      displayName: userObj.displayName,
+    });
     navigate("/profile");
   };
   return (
@@ -44,7 +51,6 @@ const Home = ({ userObj, propsApp }) => {
             sweetObj={sweet}
             isOwner={sweet.creatorId === userObj.uid}
             userObj={userObj}
-            propsHome={propsHome}
           />
         ))}
       </S.SweetContainer>
