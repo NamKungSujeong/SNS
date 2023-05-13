@@ -20,18 +20,11 @@ export const Nav = styled.nav`
   align-items: center;
 `;
 
-export const ProfileImg = styled.img`
-  width: 80px;
-  height: 80px;
-  border: 3px solid white;
-  border-radius: 50%;
-  margin-bottom: 10px;
-`;
-
 export const UserDisplayName = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   margin-left: 10px;
+  margin-top: 10px;
 `;
 
 export const UserProfile = styled.section`

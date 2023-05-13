@@ -8,6 +8,7 @@ import userInitPhoto from "../asset/user.png";
 import WriteBtn from "components/WriteBtn";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
+import Avatar from "@mui/material/Avatar";
 
 const Home = () => {
   const [sweets, setSweets] = useState([]);
@@ -67,7 +68,7 @@ const Nav = ({ userObj, moveProfile }) => {
       <S.Ul>
         <S.ProfileLi>
           <div onClick={moveProfile}>
-            <img src={imgSrc} alt="profile" />
+            <Avatar alt="profile" src={imgSrc} />
           </div>
         </S.ProfileLi>
         <S.HomeLi>

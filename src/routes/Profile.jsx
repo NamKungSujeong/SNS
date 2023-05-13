@@ -21,6 +21,7 @@ import ProfileUpdate from "components/ProfileUpdate";
 import WriteBtn from "components/WriteBtn";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
+import Avatar from "@mui/material/Avatar";
 
 const Profile = () => {
   const [sweets, setSweets] = useState([]);
@@ -123,12 +124,12 @@ const UserProfile = ({ handleEditClick, userObj, creator, isOwner }) => {
           <S.UpdateBtn>
             <button onClick={handleEditClick}>프로필 변경</button>
           </S.UpdateBtn>
-          <S.ProfileImg src={ownerSrc} alt="profile" />
+          <Avatar src={ownerSrc} alt="profile" sx={{ width: 56, height: 56 }} />
           <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
         </>
       ) : (
         <>
-          <S.ProfileImg src={imgSrc} alt="profile" />
+          <Avatar src={imgSrc} alt="profile" />
           <S.UserDisplayName>{creator.displayName}</S.UserDisplayName>
         </>
       )}

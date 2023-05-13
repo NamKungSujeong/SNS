@@ -7,11 +7,8 @@ import {
 } from "firebase/auth";
 import AuthForm from "components/AuthForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGoogle,
-  faGithub,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./Auth.styled";
 
 const Auth = () => {
@@ -31,7 +28,7 @@ const Auth = () => {
   return (
     <S.LoginContainer>
       <FontAwesomeIcon
-        icon={faTwitter}
+        icon={faPaperPlane}
         color={"#04AAFF"}
         size="3x"
         style={{ marginBottom: 30 }}

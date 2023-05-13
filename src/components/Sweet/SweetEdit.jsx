@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./SweetEdit.styled";
 import userInitPhoto from "../../asset/user.png";
+import Avatar from "@mui/material/Avatar";
 
 export const SweetEdit = ({
   sweetObj,
@@ -18,7 +19,7 @@ export const SweetEdit = ({
 
   return (
     <S.EditBlock>
-      <S.ProfileImgEdit src={imgSrc} alt="profile" />
+      <Avatar src={imgSrc} alt="profile" />
       <S.Form onSubmit={handleSubmit}>
         <label htmlFor="file">
           <FontAwesomeIcon icon={faImage} size="xl" />

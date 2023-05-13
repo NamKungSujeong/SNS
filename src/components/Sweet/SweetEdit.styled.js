@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ProfileImg } from "routes/Profile.styled";
 
 export const EditBtns = styled.div`
   margin-top: 20px;
@@ -18,9 +17,9 @@ export const EditBtns = styled.div`
   }
 `;
 
-export const ProfileImgEdit = styled(ProfileImg)`
-  margin: 15px 15px 0 0;
-`;
+// export const ProfileImgEdit = styled(ProfileImg)`
+//   margin: 15px 15px 0 0;
+// `;
 
 export const Form = styled.form`
   display: flex;

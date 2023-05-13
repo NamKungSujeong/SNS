@@ -24,13 +24,6 @@ export const SweetInfo = styled.div`
   margin-bottom: 10px;
 `;
 
-export const ProfileImg = styled.img`
-  width: 35px;
-  height: 35px;
-  border: 1px solid white;
-  border-radius: 50%;
-`;
-
 export const SweetBlock = styled.div`
   width: 100%;
   margin-left: 10px;

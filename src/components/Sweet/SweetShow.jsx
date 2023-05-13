@@ -7,6 +7,7 @@ import koLocale from "timeago.js/lib/lang/ko";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { SweetContext } from "contexts/SweetProvider";
+import Avatar from "@mui/material/Avatar";
 
 register("ko", koLocale);
 
@@ -32,7 +33,7 @@ const SweetShow = ({
   return (
     <S.SweetContent>
       <Link to="/profile">
-        <S.ProfileImg src={imgSrc} alt="profile" onClick={onProfileClick} />
+        <Avatar src={imgSrc} alt="profile" onClick={onProfileClick} />
       </Link>
       <S.SweetBlock>
         <S.SweetInfo>

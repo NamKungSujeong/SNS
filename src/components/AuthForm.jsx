@@ -33,6 +33,8 @@ const AuthForm = () => {
         setErrorEmail("아이디가 존재하지 않습니다.");
       } else if (error.code === "auth/wrong-password") {
         setErrorPw("비밀번호가 올바르지 않습니다.");
+      } else {
+        setErrorEmail("아이디/비밀번호를 확인해주세요");
       }
     }
   };

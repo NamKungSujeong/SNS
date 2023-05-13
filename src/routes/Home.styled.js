@@ -29,12 +29,6 @@ export const Ul = styled.ul`
 
 export const ProfileLi = styled.li`
   cursor: pointer;
-  img {
-    border-radius: 50%;
-    border: 1px solid white;
-    width: 40px;
-    height: 40px;
-  }
 `;
 
 export const HomeLi = styled.li`
