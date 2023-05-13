@@ -31,7 +31,7 @@ const Profile = () => {
   const authConsumer = useContext(AuthContext);
   const { userObj } = authConsumer;
   const sweetConsumer = useContext(SweetContext);
-  const { creator } = sweetConsumer;
+  const { creator, setCreator } = sweetConsumer;
 
   useEffect(() => {
     const q = query(
@@ -46,6 +46,10 @@ const Profile = () => {
       }));
       setSweets(sweetArr);
     });
+
+    if (creator.id === "") {
+      navigate("/");
+    }
   }, [
     userObj.uid,
     userObj.displayName,
@@ -53,6 +57,8 @@ const Profile = () => {
     creator.id,
     creator.url,
     creator.displayName,
+    setCreator,
+    navigate,
   ]);
 
   const handleLogoutClick = () => {
