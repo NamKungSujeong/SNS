@@ -7,11 +7,11 @@ export const EditBtns = styled.div`
   button {
     padding: 5px 10px;
     border-radius: 10px;
-    border: 2px solid #04aaff;
+    border: 2px solid var(--mainColor);
     margin: 0 5px;
 
     &:hover {
-      background-color: #04aaff;
+      background-color: var(--mainColor);
       color: white;
     }
   }

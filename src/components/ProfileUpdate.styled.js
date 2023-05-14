@@ -54,10 +54,10 @@ export const UpdateBtn = styled.button`
   left: 70px;
   padding: 5px 10px;
   border-radius: 10px;
-  border: 2px solid #04aaff;
+  border: 2px solid var(--mainColor);
 
   &:hover {
-    background-color: #04aaff;
+    background-color: var(--mainColor);
     color: white;
   }
 `;

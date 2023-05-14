@@ -2,10 +2,11 @@ import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleLeft,
+  faArrowLeft,
   faImage,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +72,7 @@ const Write = () => {
     <S.WriteContainer>
       <S.BackBtn>
         <FontAwesomeIcon
-          icon={faCircleLeft}
+          icon={faArrowLeft}
           onClick={handleBackClick}
           size="xl"
         />
