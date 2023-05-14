@@ -29,21 +29,21 @@ export const InputSubmit = styled.button`
   width: 100%;
   max-width: 320px;
   height: 35px;
-  background-color: #04aaff;
+  background-color: var(--mainColor);
   border-radius: 15px;
   margin-bottom: 30px;
   text-align: center;
   cursor: pointer;
   color: white;
   &:hover {
-    background-color: #0661d0;
+    background-color: var(--mainColor);
     transition: all 0.2s linear;
   }
 `;
 
 export const ToggleClickBtn = styled.span`
   text-decoration: underline;
-  color: #04aaff;
+  color: var(--mainColor);
   text-align: center;
   cursor: pointer;
 `;

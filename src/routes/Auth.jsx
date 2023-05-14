@@ -29,7 +29,7 @@ const Auth = () => {
     <S.LoginContainer>
       <FontAwesomeIcon
         icon={faPaperPlane}
-        color={"#04AAFF"}
+        color={"#ea8a8a"}
         size="3x"
         style={{ marginBottom: 30 }}
       />

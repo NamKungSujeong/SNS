@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const SweetContent = styled.div`
-  border-bottom: 1px solid #aaa;
   padding: 10px 5px;
   display: flex;
   &:hover {

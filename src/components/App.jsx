@@ -2,9 +2,9 @@ import { useEffect, useContext } from "react";
 import AppRouter from "./Router";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import * as S from "./App.styled";
 import { AuthContext } from "../contexts/AuthProvider";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   useEffect(() => {
@@ -19,15 +19,15 @@ function App() {
 
   return (
     <S.AppBlock>
-      <Loading />
       <S.AppContainer>
+        <Loading />
         <S.AppContent>
           {init ? (
             <>
               <AppRouter />
             </>
           ) : (
-            <div>로딩중...</div>
+            <Loading />
           )}
         </S.AppContent>
       </S.AppContainer>
@@ -52,17 +52,19 @@ const Loading = () => {
     <div
       className="loading"
       style={{
-        backgroundColor: "#04aaff",
+        backgroundColor: "var(--mainColor)",
         width: "100%",
-        height: "100vh",
+        maxWidth: "370px",
+        height: "650px",
         position: "absolute",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         zIndex: 10,
+        borderRadius: "10px",
       }}
     >
-      <FontAwesomeIcon icon={faTwitter} color={"white"} size="3x" beat />
+      <FontAwesomeIcon icon={faPaperPlane} color={"white"} size="3x" beat />
     </div>
   );
 };

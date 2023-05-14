@@ -17,10 +17,6 @@ export const EditBtns = styled.div`
   }
 `;
 
-// export const ProfileImgEdit = styled(ProfileImg)`
-//   margin: 15px 15px 0 0;
-// `;
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

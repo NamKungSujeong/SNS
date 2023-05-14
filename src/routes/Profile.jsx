@@ -18,10 +18,10 @@ import {
   faCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import ProfileUpdate from "components/ProfileUpdate";
-import WriteBtn from "components/WriteBtn";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
 import Avatar from "@mui/material/Avatar";
+import BottomAppBar from "components/AppBar";
 
 const Profile = () => {
   const [sweets, setSweets] = useState([]);
@@ -71,33 +71,35 @@ const Profile = () => {
   };
 
   return (
-    <S.ProfileContainer>
-      <Nav handleLogoutClick={handleLogoutClick} />
-      <UserProfile
-        userObj={userObj}
-        handleEditClick={handleEditClick}
-        creator={creator}
-        isOwner={creator.id === userObj.uid}
-      />
-      <span>{sweets.length} sweets</span>
-      <S.SweetContainer>
-        {sweets.map((sweet) => (
-          <Sweet
-            key={sweet.id}
-            sweetObj={sweet}
-            isOwner={sweet.creatorId === userObj.uid}
-          />
-        ))}
-      </S.SweetContainer>
-      {isEditing && (
-        <ProfileUpdate
+    <>
+      <S.ProfileContainer>
+        <Nav handleLogoutClick={handleLogoutClick} />
+        <UserProfile
           userObj={userObj}
-          sweets={sweets}
           handleEditClick={handleEditClick}
+          creator={creator}
+          isOwner={creator.id === userObj.uid}
         />
-      )}
-      <WriteBtn />
-    </S.ProfileContainer>
+        <span>{sweets.length} sweets</span>
+        <S.SweetContainer>
+          {sweets.map((sweet) => (
+            <Sweet
+              key={sweet.id}
+              sweetObj={sweet}
+              isOwner={sweet.creatorId === userObj.uid}
+            />
+          ))}
+        </S.SweetContainer>
+        {isEditing && (
+          <ProfileUpdate
+            userObj={userObj}
+            sweets={sweets}
+            handleEditClick={handleEditClick}
+          />
+        )}
+      </S.ProfileContainer>
+      <BottomAppBar />
+    </>
   );
 };
 

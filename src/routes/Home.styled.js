@@ -4,7 +4,7 @@ export const HomeContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 320px;
+  // max-width: 320px;
   margin: auto;
 `;
 
@@ -20,6 +20,7 @@ export const Nav = styled.nav`
   background-color: white;
   display: flex;
   height: 70px;
+  border-radius: 10px 10px 0 0;
 `;
 
 export const Ul = styled.ul`
@@ -32,8 +33,10 @@ export const ProfileLi = styled.li`
 `;
 
 export const HomeLi = styled.li`
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
-  padding-left: 90px;
+  height: 66px;
 `;

@@ -16,8 +16,8 @@ export const SocialBtn = styled.button`
   border: 1px solid #aaa;
 
   &:hover {
-    border: 1px solid #04aaff;
-    background-color: #04aaff;
+    border: 1px solid var(--mainColor);
+    background-color: var(--mainColor);
     color: white;
   }
 `;

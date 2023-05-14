@@ -17,7 +17,7 @@ export const AppContainer = styled.div`
 
 export const AppContent = styled.main`
   width: 100%;
-  height: 660px;
+  height: 650px;
   max-width: 370px;
   background-color: white;
   border-radius: 10px;
