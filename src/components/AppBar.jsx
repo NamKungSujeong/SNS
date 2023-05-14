@@ -73,7 +73,7 @@ export default function BottomAppBar() {
           boxShadow: 0,
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ minHeight: "65px" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
