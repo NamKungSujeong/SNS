@@ -13,10 +13,7 @@ import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faRightFromBracket,
-  faCircleLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faPen } from "@fortawesome/free-solid-svg-icons";
 import ProfileUpdate from "components/ProfileUpdate";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
@@ -73,14 +70,16 @@ const Profile = () => {
   return (
     <>
       <S.ProfileContainer>
-        <Nav handleLogoutClick={handleLogoutClick} />
-        <UserProfile
-          userObj={userObj}
-          handleEditClick={handleEditClick}
-          creator={creator}
-          isOwner={creator.id === userObj.uid}
-        />
-        <span>{sweets.length} sweets</span>
+        <S.ProfileBlock>
+          <Nav handleLogoutClick={handleLogoutClick} />
+          <UserProfile
+            userObj={userObj}
+            handleEditClick={handleEditClick}
+            creator={creator}
+            isOwner={creator.id === userObj.uid}
+            sweets={sweets}
+          />
+        </S.ProfileBlock>
         <S.SweetContainer>
           {sweets.map((sweet) => (
             <Sweet
@@ -110,35 +109,60 @@ const Nav = ({ handleLogoutClick }) => {
     <S.Nav>
       <li>
         <Link to="/">
-          <FontAwesomeIcon icon={faCircleLeft} size="xl" />
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            size="xl"
+            style={{ color: "white" }}
+          />
         </Link>
       </li>
       <li>
-        <button onClick={handleLogoutClick}>
-          <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+        <button onClick={handleLogoutClick} style={{ color: "white" }}>
+          Log Out
         </button>
       </li>
     </S.Nav>
   );
 };
 
-const UserProfile = ({ handleEditClick, userObj, creator, isOwner }) => {
+const UserProfile = ({
+  handleEditClick,
+  userObj,
+  creator,
+  isOwner,
+  sweets,
+}) => {
   const imgSrc = creator.url || userInitPhoto;
   const ownerSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.UserProfile>
       {isOwner ? (
         <>
-          <S.UpdateBtn>
-            <button onClick={handleEditClick}>프로필 변경</button>
-          </S.UpdateBtn>
-          <Avatar src={ownerSrc} alt="profile" sx={{ width: 56, height: 56 }} />
-          <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+          <Avatar
+            src={ownerSrc}
+            alt="profile"
+            sx={{ width: 80, height: 80, backgroundColor: "white" }}
+          />
+          <div style={{ margin: "10px 0 0 15px" }}>
+            <S.UserDisplayName>{userObj.displayName}</S.UserDisplayName>
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={handleEditClick}
+              size="xs"
+              style={{ color: "white", cursor: "pointer" }}
+            />
+          </div>
+          <span>게시물 {sweets.length}</span>
         </>
       ) : (
         <>
-          <Avatar src={imgSrc} alt="profile" />
+          <Avatar
+            src={imgSrc}
+            alt="profile"
+            sx={{ width: 80, height: 80, backgroundColor: "white" }}
+          />
           <S.UserDisplayName>{creator.displayName}</S.UserDisplayName>
+          <span>게시물 {sweets.length}</span>
         </>
       )}
     </S.UserProfile>

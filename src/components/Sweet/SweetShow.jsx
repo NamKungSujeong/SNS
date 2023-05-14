@@ -1,13 +1,13 @@
 import * as S from "./SweetShow.styled";
 import userInitPhoto from "../../asset/user.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { SweetContext } from "contexts/SweetProvider";
 import Avatar from "@mui/material/Avatar";
+import DashBoard from "components/DashBoard";
+import MenuItem from "@mui/material/MenuItem";
 
 register("ko", koLocale);
 
@@ -37,22 +37,22 @@ const SweetShow = ({
       </Link>
       <S.SweetBlock>
         <S.SweetInfo>
-          <S.DisplayName>{sweetObj.displayName}</S.DisplayName>
-          <S.CreatedAtSpan>{format(sweetObj.createdAt, "ko")}</S.CreatedAtSpan>
+          <div>
+            <S.DisplayName>{sweetObj.displayName}</S.DisplayName>
+            <S.CreatedAtSpan>
+              {format(sweetObj.createdAt, "ko")}
+            </S.CreatedAtSpan>
+          </div>
+          {isOwner && (
+            <DashBoard style={{ display: "inline-block" }}>
+              <MenuItem onClick={handleToggleEditingClick}>Update</MenuItem>
+              <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
+            </DashBoard>
+          )}
         </S.SweetInfo>
         <S.SweerText>{sweetObj.text}</S.SweerText>
         {sweetObj.attachmentURL && (
           <S.SweetImg src={sweetObj.attachmentURL} alt="file" />
-        )}
-        {isOwner && (
-          <S.SweetBtns>
-            <button onClick={handleToggleEditingClick}>
-              <FontAwesomeIcon icon={faPen} />
-            </button>
-            <button onClick={handleDeleteClick}>
-              <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-          </S.SweetBtns>
         )}
       </S.SweetBlock>
     </S.SweetContent>

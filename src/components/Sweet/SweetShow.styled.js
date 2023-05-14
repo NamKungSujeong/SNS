@@ -21,6 +21,8 @@ export const CreatedAtSpan = styled.span`
 
 export const SweetInfo = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const SweetBlock = styled.div`
@@ -33,7 +35,7 @@ export const SweerText = styled.p`
 `;
 
 export const SweetImg = styled.img`
-  width: 100%;
+  width: 250px;
 `;
 
 export const SweetBtns = styled.div`
