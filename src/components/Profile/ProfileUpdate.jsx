@@ -11,7 +11,7 @@ import * as S from "./ProfileUpdate.styled";
 import userInitPhoto from "../../asset/user.png";
 import Modal from "../common/Modal";
 
-const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
+const ProfileUpdate = ({ userObj, posts, handleEditClick }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
 
@@ -49,8 +49,8 @@ const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
         photoURL,
       });
       await Promise.all(
-        sweets.map(async (item) => {
-          const nameRef = doc(dbService, "sweets", `${item.id}`);
+        posts.map(async (item) => {
+          const nameRef = doc(dbService, "posts", `${item.id}`);
           await updateDoc(nameRef, {
             displayName: newDisplayName,
             profilePhoto: photoURL,

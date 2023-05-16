@@ -8,7 +8,7 @@ export const HomeContainer = styled.section`
   margin: auto;
 `;
 
-export const SweetContainer = styled.div`
+export const PostContainer = styled.div`
   height: 520px;
   overflow: scroll;
   width: 100%;

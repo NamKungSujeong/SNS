@@ -6,7 +6,7 @@ export const ProfileContainer = styled.section`
   width: 100%;
 `;
 
-export const SweetContainer = styled.section`
+export const PostContainer = styled.section`
   height: 365px;
   overflow: scroll;
   padding: 20px;

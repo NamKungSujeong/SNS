@@ -3,12 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./PostEdit.styled";
 
-export const SweetEdit = ({
-  sweetObj,
+export const PostEdit = ({
   handleSubmit,
   handleAttachmentChange,
-  newSweet,
-  handleSweetChange,
+  newPost,
+  handlePostChange,
   attachment,
   handleClearAttachmentClick,
   handleToggleEditingClick,
@@ -26,10 +25,10 @@ export const SweetEdit = ({
           onChange={handleAttachmentChange}
         />
         <S.TextArea
-          value={newSweet}
+          value={newPost}
           placeholder="Edit"
           required
-          onChange={handleSweetChange}
+          onChange={handlePostChange}
         />
         {attachment && (
           <Attachment
@@ -46,4 +45,4 @@ export const SweetEdit = ({
   );
 };
 
-export default SweetEdit;
+export default PostEdit;

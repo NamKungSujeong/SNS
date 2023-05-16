@@ -4,7 +4,7 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import Profile from "routes/Profile";
-import SweetFactory from "routes/Write";
+import Write from "routes/Write";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const AppRouter = () => {
@@ -17,7 +17,7 @@ const AppRouter = () => {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/write" element={<SweetFactory />} />
+            <Route path="/write" element={<Write />} />
           </>
         ) : (
           <Route path="/" element={<Auth />} />

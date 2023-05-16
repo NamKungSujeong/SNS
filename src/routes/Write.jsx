@@ -17,7 +17,7 @@ import { dbService, storageService } from "fbase";
 import * as S from "./Write.styled";
 
 const Write = () => {
-  const [sweet, setSweet] = useState("");
+  const [posts, setPosts] = useState("");
   const [attachment, setAttachment] = useState("");
   const navigate = useNavigate();
   const authConsumer = useContext(AuthContext);
@@ -31,8 +31,8 @@ const Write = () => {
       const res = await uploadString(attachmentRef, attachment, "data_url");
       attachmentURL = await getDownloadURL(res.ref);
     }
-    const sweetObj = {
-      text: sweet,
+    const postObj = {
+      text: posts,
       createdAt: Date.now(),
       creatorId: userObj.uid,
       displayName: userObj.displayName,
@@ -40,17 +40,17 @@ const Write = () => {
       attachmentURL,
     };
     try {
-      await addDoc(collection(dbService, "sweets"), sweetObj);
+      await addDoc(collection(dbService, "posts"), postObj);
     } catch (err) {
       console.log("Error adding document", err);
     }
-    setSweet("");
+    setPosts("");
     setAttachment("");
     navigate("/");
   };
 
-  const handleSweetChange = (e) => {
-    setSweet(e.target.value);
+  const handlePostChange = (e) => {
+    setPosts(e.target.value);
   };
 
   const handleAttachmentChange = (e) => {
@@ -77,12 +77,12 @@ const Write = () => {
           size="xl"
         />
       </S.BackBtn>
-      <S.SweetForm onSubmit={handleSubmit}>
+      <S.PostForm onSubmit={handleSubmit}>
         <FileInput handleAttachmentChange={handleAttachmentChange} />
         <S.Textarea
           type="text"
-          value={sweet}
-          onChange={handleSweetChange}
+          value={posts}
+          onChange={handlePostChange}
           placeholder="What's on your mind?"
           maxLength={120}
         />
@@ -91,7 +91,7 @@ const Write = () => {
           handleClearAttachmentClick={handleClearAttachmentClick}
         />
         <S.SubmitBtn type="submit">send</S.SubmitBtn>
-      </S.SweetForm>
+      </S.PostForm>
     </S.WriteContainer>
   );
 };

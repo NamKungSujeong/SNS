@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SweetContent = styled.div`
+export const PostContent = styled.div`
   padding: 10px 5px;
   display: flex;
   &:hover {
@@ -19,13 +19,13 @@ export const CreatedAtSpan = styled.span`
   margin-left: 10px;
 `;
 
-export const SweetInfo = styled.div`
+export const PostInfo = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 `;
 
-export const SweetBlock = styled.div`
+export const PostBlock = styled.div`
   width: 100%;
   margin-left: 10px;
 `;
@@ -34,10 +34,10 @@ export const SweerText = styled.p`
   margin: 10px 0;
 `;
 
-export const SweetImg = styled.img`
+export const PostImg = styled.img`
   width: 250px;
 `;
 
-export const SweetBtns = styled.div`
+export const PostBtns = styled.div`
   text-align: right;
 `;

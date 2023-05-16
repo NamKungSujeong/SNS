@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
-import Sweet from "components/Post/Post";
+import Post from "components/Post/Post";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
 
@@ -10,22 +10,22 @@ import { AuthContext } from "contexts/AuthProvider";
 import BottomAppBar from "components/common/AppBar";
 
 const Home = () => {
-  const [sweets, setSweets] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const authConsumer = useContext(AuthContext);
   const { userObj } = authConsumer;
 
   useEffect(() => {
     const q = query(
-      collection(dbService, "sweets"),
+      collection(dbService, "posts"),
       orderBy("createdAt", "desc")
     );
     onSnapshot(q, (snapshot) => {
-      const sweetArr = snapshot.docs.map((doc) => ({
+      const postArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setSweets(sweetArr);
+      setPosts(postArr);
     });
   }, []);
 
@@ -35,16 +35,16 @@ const Home = () => {
         <Link to="/">Home</Link>
       </S.HomeLi>
       <div style={{ height: "500px" }}>
-        <S.SweetContainer>
-          {sweets.map((sweet) => (
-            <Sweet
-              key={sweet.id}
-              sweetObj={sweet}
-              isOwner={sweet.creatorId === userObj.uid}
+        <S.PostContainer>
+          {posts.map((posts) => (
+            <Post
+              key={posts.id}
+              postObj={posts}
+              isOwner={posts.creatorId === userObj.uid}
               userObj={userObj}
             />
           ))}
-        </S.SweetContainer>
+        </S.PostContainer>
         {/* <WriteBtn /> */}
         <BottomAppBar />
       </div>

@@ -8,7 +8,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { signOut } from "firebase/auth";
-import Sweet from "components/Post/Post";
+import Post from "components/Post/Post";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,32 +16,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faPen } from "@fortawesome/free-solid-svg-icons";
 import ProfileUpdate from "components/Profile/ProfileUpdate";
 import { AuthContext } from "contexts/AuthProvider";
-import { SweetContext } from "contexts/SweetProvider";
+import { PostContext } from "contexts/PostProvider";
 import Avatar from "@mui/material/Avatar";
 import BottomAppBar from "components/common/AppBar";
 
 const Profile = () => {
-  const [sweets, setSweets] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   const authConsumer = useContext(AuthContext);
   const { userObj } = authConsumer;
-  const sweetConsumer = useContext(SweetContext);
-  const { creator, setCreator } = sweetConsumer;
+  const postConsumer = useContext(PostContext);
+  const { creator, setCreator } = postConsumer;
 
   useEffect(() => {
     const q = query(
-      collection(dbService, "sweets"),
+      collection(dbService, "posts"),
       where("creatorId", "==", creator.id),
       orderBy("createdAt", "desc")
     );
     onSnapshot(q, (snapshot) => {
-      const sweetArr = snapshot.docs.map((doc) => ({
+      const postArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setSweets(sweetArr);
+      setPosts(postArr);
     });
 
     if (creator.id === "") {
@@ -77,22 +77,22 @@ const Profile = () => {
             handleEditClick={handleEditClick}
             creator={creator}
             isOwner={creator.id === userObj.uid}
-            sweets={sweets}
+            posts={posts}
           />
         </S.ProfileBlock>
-        <S.SweetContainer>
-          {sweets.map((sweet) => (
-            <Sweet
-              key={sweet.id}
-              sweetObj={sweet}
-              isOwner={sweet.creatorId === userObj.uid}
+        <S.PostContainer>
+          {posts.map((post) => (
+            <Post
+              key={post.id}
+              postObj={post}
+              isOwner={post.creatorId === userObj.uid}
             />
           ))}
-        </S.SweetContainer>
+        </S.PostContainer>
         {isEditing && (
           <ProfileUpdate
             userObj={userObj}
-            sweets={sweets}
+            posts={posts}
             handleEditClick={handleEditClick}
           />
         )}
@@ -125,21 +125,15 @@ const Nav = ({ handleLogoutClick }) => {
   );
 };
 
-const UserProfile = ({
-  handleEditClick,
-  userObj,
-  creator,
-  isOwner,
-  sweets,
-}) => {
+const UserProfile = ({ handleEditClick, userObj, creator, isOwner, posts }) => {
   const imgSrc = creator.url || userInitPhoto;
-  const ownerSrc = userObj.photoURL || userInitPhoto;
+  // const ownerSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.UserProfile>
       {isOwner ? (
         <>
           <Avatar
-            src={ownerSrc}
+            src={imgSrc}
             alt="profile"
             sx={{ width: 80, height: 80, backgroundColor: "white" }}
           />
@@ -152,7 +146,7 @@ const UserProfile = ({
               style={{ color: "white", cursor: "pointer" }}
             />
           </div>
-          <span>게시물 {sweets.length}</span>
+          <span>게시물 {posts.length}</span>
         </>
       ) : (
         <>
@@ -162,7 +156,7 @@ const UserProfile = ({
             sx={{ width: 80, height: 80, backgroundColor: "white" }}
           />
           <S.UserDisplayName>{creator.displayName}</S.UserDisplayName>
-          <span>게시물 {sweets.length}</span>
+          <span>게시물 {posts.length}</span>
         </>
       )}
     </S.UserProfile>

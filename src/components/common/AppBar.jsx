@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "contexts/AuthProvider";
-import { SweetContext } from "contexts/SweetProvider";
+import { PostContext } from "contexts/PostProvider";
 import userInitPhoto from "../../asset/user.png";
 
 const StyledFab = styled(Fab)({
@@ -44,8 +44,8 @@ export default function BottomAppBar() {
 
   const authConsumer = useContext(AuthContext);
   const { userObj } = authConsumer;
-  const sweetConsumer = useContext(SweetContext);
-  const { setCreator } = sweetConsumer;
+  const postConsumer = useContext(PostContext);
+  const { setCreator } = postConsumer;
 
   const imgSrc = userObj.photoURL || userInitPhoto;
   return (

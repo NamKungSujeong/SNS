@@ -4,44 +4,42 @@ import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { SweetContext } from "contexts/SweetProvider";
+import { PostContext } from "contexts/PostProvider";
 import Avatar from "@mui/material/Avatar";
 import DashBoard from "components/common/DashBoard";
 import MenuItem from "@mui/material/MenuItem";
 
 register("ko", koLocale);
 
-const SweetShow = ({
-  sweetObj,
+const PostShow = ({
+  postObj,
   isOwner,
   handleToggleEditingClick,
   handleDeleteClick,
 }) => {
-  const sweetConsumer = useContext(SweetContext);
-  const { setCreator } = sweetConsumer;
+  const postConsumer = useContext(PostContext);
+  const { setCreator } = postConsumer;
 
-  const imgSrc = sweetObj.profilePhoto || userInitPhoto;
+  const imgSrc = postObj.profilePhoto || userInitPhoto;
 
   const onProfileClick = () => {
     setCreator({
-      id: sweetObj.creatorId,
-      url: sweetObj.profilePhoto,
-      displayName: sweetObj.displayName,
+      id: postObj.creatorId,
+      url: postObj.profilePhoto,
+      displayName: postObj.displayName,
     });
   };
 
   return (
-    <S.SweetContent>
+    <S.PostContent>
       <Link to="/profile">
         <Avatar src={imgSrc} alt="profile" onClick={onProfileClick} />
       </Link>
-      <S.SweetBlock>
-        <S.SweetInfo>
+      <S.PostBlock>
+        <S.PostInfo>
           <div>
-            <S.DisplayName>{sweetObj.displayName}</S.DisplayName>
-            <S.CreatedAtSpan>
-              {format(sweetObj.createdAt, "ko")}
-            </S.CreatedAtSpan>
+            <S.DisplayName>{postObj.displayName}</S.DisplayName>
+            <S.CreatedAtSpan>{format(postObj.createdAt, "ko")}</S.CreatedAtSpan>
           </div>
           {isOwner && (
             <DashBoard style={{ display: "inline-block" }}>
@@ -49,14 +47,14 @@ const SweetShow = ({
               <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
             </DashBoard>
           )}
-        </S.SweetInfo>
-        <S.SweerText>{sweetObj.text}</S.SweerText>
-        {sweetObj.attachmentURL && (
-          <S.SweetImg src={sweetObj.attachmentURL} alt="file" />
+        </S.PostInfo>
+        <S.SweerText>{postObj.text}</S.SweerText>
+        {postObj.attachmentURL && (
+          <S.PostImg src={postObj.attachmentURL} alt="file" />
         )}
-      </S.SweetBlock>
-    </S.SweetContent>
+      </S.PostBlock>
+    </S.PostContent>
   );
 };
 
-export default SweetShow;
+export default PostShow;

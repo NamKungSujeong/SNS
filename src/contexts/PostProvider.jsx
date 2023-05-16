@@ -4,10 +4,10 @@ import { dbService } from "fbase";
 
 import { AuthContext } from "contexts/AuthProvider";
 
-const SweetContext = createContext();
+const PostContext = createContext();
 
-const SweetProvider = ({ children }) => {
-  const [sweets, setSweets] = useState([]);
+const PostProvider = ({ children }) => {
+  const [posts, setPosts] = useState([]);
   const [creator, setCreator] = useState({
     id: "",
     url: "",
@@ -16,25 +16,25 @@ const SweetProvider = ({ children }) => {
 
   useEffect(() => {
     const q = query(
-      collection(dbService, "sweets"),
+      collection(dbService, "posts"),
       orderBy("createdAt", "desc")
     );
     onSnapshot(q, (snapshot) => {
-      const sweetArr = snapshot.docs.map((doc) => ({
+      const postArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setSweets(sweetArr);
+      setPosts(postArr);
     });
   }, []);
 
   return (
-    <SweetContext.Provider value={{ sweets, creator, setCreator }}>
+    <PostContext.Provider value={{ posts, creator, setCreator }}>
       {children}
-    </SweetContext.Provider>
+    </PostContext.Provider>
   );
 };
 
-const SweetConsumer = AuthContext.Consumer;
+const PostConsumer = AuthContext.Consumer;
 
-export { SweetContext, SweetConsumer, SweetProvider };
+export { PostConsumer, PostContext, PostProvider };

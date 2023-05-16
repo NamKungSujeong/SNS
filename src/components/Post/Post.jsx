@@ -5,43 +5,43 @@ import { deleteObject, ref } from "firebase/storage";
 import PropTypes from "prop-types";
 
 import Modal from "../common/Modal";
-import SweetEdit from "./PostEdit";
-import SweetShow from "./PostContent";
+import PostEdit from "./PostEdit";
+import PostShow from "./PostContent";
 
-const Sweet = ({ sweetObj, isOwner }) => {
-  const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);
+const Post = ({ postObj, isOwner }) => {
+  const postRef = doc(dbService, "posts", `${postObj.id}`);
   const [editing, setEditing] = useState(false);
-  const [newSweet, setNewSweet] = useState(sweetObj.text);
-  const [attachment, setAttachment] = useState(sweetObj.attachmentURL);
+  const [newPost, setNewPost] = useState(postObj.text);
+  const [attachment, setAttachment] = useState(postObj.attachmentURL);
 
   const handleDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠습니까?");
 
     if (ok) {
-      await deleteDoc(sweetRef);
+      await deleteDoc(postRef);
 
-      if (sweetObj.attachmentURL !== "") {
-        await deleteObject(ref(storageService, sweetObj.attachmentURL));
+      if (postObj.attachmentURL !== "") {
+        await deleteObject(ref(storageService, postObj.attachmentURL));
       }
     }
   };
 
   const handleToggleEditingClick = () => {
     setEditing((prev) => !prev);
-    setAttachment(sweetObj.attachmentURL);
+    setAttachment(postObj.attachmentURL);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateDoc(sweetRef, {
-      text: newSweet,
+    await updateDoc(postRef, {
+      text: newPost,
       attachmentURL: attachment,
     });
     setEditing(false);
   };
 
-  const handleSweetChange = (e) => {
-    setNewSweet(e.target.value);
+  const handlePostChange = (e) => {
+    setNewPost(e.target.value);
   };
 
   const handleAttachmentChange = (e) => {
@@ -59,20 +59,20 @@ const Sweet = ({ sweetObj, isOwner }) => {
     <div>
       {editing ? (
         <Modal>
-          <SweetEdit
-            sweetObj={sweetObj}
+          <PostEdit
+            postObj={postObj}
             handleSubmit={handleSubmit}
             handleAttachmentChange={handleAttachmentChange}
-            newSweet={newSweet}
-            handleSweetChange={handleSweetChange}
+            newPost={newPost}
+            handlePostChange={handlePostChange}
             attachment={attachment}
             handleClearAttachmentClick={handleClearAttachmentClick}
             handleToggleEditingClick={handleToggleEditingClick}
           />
         </Modal>
       ) : (
-        <SweetShow
-          sweetObj={sweetObj}
+        <PostShow
+          postObj={postObj}
           isOwner={isOwner}
           handleToggleEditingClick={handleToggleEditingClick}
           handleDeleteClick={handleDeleteClick}
@@ -82,10 +82,10 @@ const Sweet = ({ sweetObj, isOwner }) => {
   );
 };
 
-export default Sweet;
+export default Post;
 
-Sweet.propTypes = {
-  sweetObj: PropTypes.shape({
+Post.propTypes = {
+  postObj: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,
     attachmentURL: PropTypes.string,

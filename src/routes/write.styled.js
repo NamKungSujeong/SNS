@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const WriteContainer = styled.div``;
 
-export const SweetForm = styled.form`
+export const PostForm = styled.form`
   margin: auto;
   height: 450px;
   width: 100%;
