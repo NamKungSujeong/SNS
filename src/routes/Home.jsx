@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "fbase";
-import Sweet from "components/Sweet/Sweet";
+import Sweet from "components/Post/Post";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
 
 import { AuthContext } from "contexts/AuthProvider";
 
-import BottomAppBar from "components/AppBar";
+import BottomAppBar from "components/common/AppBar";
 
 const Home = () => {
   const [sweets, setSweets] = useState([]);

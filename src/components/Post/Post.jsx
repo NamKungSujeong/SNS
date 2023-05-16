@@ -4,9 +4,9 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import PropTypes from "prop-types";
 
-import Modal from "../Modal";
-import SweetEdit from "./SweetEdit";
-import SweetShow from "./SweetShow";
+import Modal from "../common/Modal";
+import SweetEdit from "./PostEdit";
+import SweetShow from "./PostContent";
 
 const Sweet = ({ sweetObj, isOwner }) => {
   const sweetRef = doc(dbService, "sweets", `${sweetObj.id}`);

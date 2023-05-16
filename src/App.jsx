@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
-import AppRouter from "./Router";
+import AppRouter from "./components/Router";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./App.styled";
-import { AuthContext } from "../contexts/AuthProvider";
+import { AuthContext } from "./contexts/AuthProvider";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 function App() {

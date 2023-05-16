@@ -1,7 +1,7 @@
 import { Attachment } from "../../routes/Write";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
-import * as S from "./SweetEdit.styled";
+import * as S from "./PostEdit.styled";
 
 export const SweetEdit = ({
   sweetObj,

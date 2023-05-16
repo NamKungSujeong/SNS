@@ -8,17 +8,17 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { signOut } from "firebase/auth";
-import Sweet from "components/Sweet/Sweet";
+import Sweet from "components/Post/Post";
 import userInitPhoto from "../asset/user.png";
 import * as S from "./Profile.styled";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faPen } from "@fortawesome/free-solid-svg-icons";
-import ProfileUpdate from "components/ProfileUpdate";
+import ProfileUpdate from "components/Profile/ProfileUpdate";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
 import Avatar from "@mui/material/Avatar";
-import BottomAppBar from "components/AppBar";
+import BottomAppBar from "components/common/AppBar";
 
 const Profile = () => {
   const [sweets, setSweets] = useState([]);

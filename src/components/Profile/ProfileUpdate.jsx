@@ -9,7 +9,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./ProfileUpdate.styled";
 import userInitPhoto from "../asset/user.png";
-import Modal from "./Modal";
+import Modal from "../common/Modal";
 
 const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);

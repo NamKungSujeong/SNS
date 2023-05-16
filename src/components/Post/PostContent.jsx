@@ -1,4 +1,4 @@
-import * as S from "./SweetShow.styled";
+import * as S from "./PostContent.styled";
 import userInitPhoto from "../../asset/user.png";
 import { format, register } from "timeago.js";
 import koLocale from "timeago.js/lib/lang/ko";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { SweetContext } from "contexts/SweetProvider";
 import Avatar from "@mui/material/Avatar";
-import DashBoard from "components/DashBoard";
+import DashBoard from "components/common/DashBoard";
 import MenuItem from "@mui/material/MenuItem";
 
 register("ko", koLocale);
