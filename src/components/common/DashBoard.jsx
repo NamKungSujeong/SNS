@@ -62,6 +62,7 @@ export default function DashBoard({ children }) {
         placement="bottom-start"
         transition
         disablePortal
+        style={{ zIndex: 10 }}
       >
         {({ TransitionProps, placement }) => (
           <Grow
@@ -78,6 +79,7 @@ export default function DashBoard({ children }) {
                   id="composition-menu"
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
+                  style={{ padding: 0 }}
                 >
                   {children}
                 </MenuList>

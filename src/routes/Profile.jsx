@@ -127,13 +127,13 @@ const Nav = ({ handleLogoutClick }) => {
 
 const UserProfile = ({ handleEditClick, userObj, creator, isOwner, posts }) => {
   const imgSrc = creator.url || userInitPhoto;
-  // const ownerSrc = userObj.photoURL || userInitPhoto;
+  const ownerSrc = userObj.photoURL || userInitPhoto;
   return (
     <S.UserProfile>
       {isOwner ? (
         <>
           <Avatar
-            src={imgSrc}
+            src={ownerSrc}
             alt="profile"
             sx={{ width: 80, height: 80, backgroundColor: "white" }}
           />
