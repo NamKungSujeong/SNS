@@ -8,7 +8,7 @@ import { dbService, storageService } from "fbase";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./ProfileUpdate.styled";
-import userInitPhoto from "../asset/user.png";
+import userInitPhoto from "../../asset/user.png";
 import Modal from "../common/Modal";
 
 const ProfileUpdate = ({ userObj, sweets, handleEditClick }) => {

@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import AuthForm from "components/AuthForm";
+import AuthForm from "../components/Auth/AuthForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";

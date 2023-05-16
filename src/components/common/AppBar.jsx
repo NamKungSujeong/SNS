@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "contexts/AuthProvider";
 import { SweetContext } from "contexts/SweetProvider";
-import userInitPhoto from "../asset/user.png";
+import userInitPhoto from "../../asset/user.png";
 
 const StyledFab = styled(Fab)({
   position: "absolute",
