@@ -2,7 +2,7 @@
   "name": "switter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://NamKungSujeong.github.io/switter",
+  "homepage": "https://namkungsujeong.github.io/SNS",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
