@@ -30,7 +30,7 @@ export const PostBlock = styled.div`
   margin-left: 10px;
 `;
 
-export const SweerText = styled.p`
+export const PostText = styled.p`
   margin: 10px 0;
 `;
 

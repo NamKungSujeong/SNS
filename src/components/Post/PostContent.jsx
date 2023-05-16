@@ -43,12 +43,22 @@ const PostShow = ({
           </div>
           {isOwner && (
             <DashBoard style={{ display: "inline-block" }}>
-              <MenuItem onClick={handleToggleEditingClick}>Update</MenuItem>
-              <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
+              <MenuItem
+                onClick={handleToggleEditingClick}
+                style={{ fontSize: "14px" }}
+              >
+                Update
+              </MenuItem>
+              <MenuItem
+                onClick={handleDeleteClick}
+                style={{ fontSize: "14px" }}
+              >
+                Delete
+              </MenuItem>
             </DashBoard>
           )}
         </S.PostInfo>
-        <S.SweerText>{postObj.text}</S.SweerText>
+        <S.PostText>{postObj.text}</S.PostText>
         {postObj.attachmentURL && (
           <S.PostImg src={postObj.attachmentURL} alt="file" />
         )}
