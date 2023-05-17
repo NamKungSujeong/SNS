@@ -45,7 +45,6 @@ const Home = () => {
             />
           ))}
         </S.PostContainer>
-        {/* <WriteBtn /> */}
         <BottomAppBar />
       </div>
     </S.HomeContainer>
