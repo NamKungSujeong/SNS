@@ -3,8 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
 import { authService } from "fbase";
+import PropTypes from "prop-types";
 
 import * as S from "./AuthForm.styled";
 
@@ -101,3 +101,8 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
+
+AuthForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+};

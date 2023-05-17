@@ -31,6 +31,13 @@ const StyledFab = styled(Fab)({
 });
 
 export default function BottomAppBar() {
+  const navigate = useNavigate();
+
+  const authConsumer = useContext(AuthContext);
+  const { userObj } = authConsumer;
+  const postConsumer = useContext(PostContext);
+  const { setCreator } = postConsumer;
+
   const moveProfile = () => {
     setCreator({
       id: userObj.uid,
@@ -40,14 +47,8 @@ export default function BottomAppBar() {
     navigate("/profile");
   };
 
-  const navigate = useNavigate();
-
-  const authConsumer = useContext(AuthContext);
-  const { userObj } = authConsumer;
-  const postConsumer = useContext(PostContext);
-  const { setCreator } = postConsumer;
-
   const imgSrc = userObj.photoURL || userInitPhoto;
+
   return (
     <React.Fragment>
       <CssBaseline />

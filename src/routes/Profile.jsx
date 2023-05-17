@@ -41,7 +41,7 @@ const Profile = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      setPosts(postArr);
+      if (postArr.length === 0) setPosts(postArr);
     });
 
     if (creator.id === "") {
