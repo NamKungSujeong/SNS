@@ -9,6 +9,7 @@ export const EditBtns = styled.div`
     border-radius: 10px;
     border: 2px solid var(--mainColor);
     margin: 0 5px;
+    color: black;
 
     &:hover {
       background-color: var(--mainColor);

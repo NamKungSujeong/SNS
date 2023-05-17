@@ -28,6 +28,7 @@ export const SubmitBtn = styled.button`
   padding: 5px 10px;
   border-radius: 10px;
   border: 2px solid var(--mainColor);
+  color: black;
 
   &:hover {
     background-color: var(--mainColor);

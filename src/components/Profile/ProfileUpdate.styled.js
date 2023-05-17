@@ -54,6 +54,7 @@ export const UpdateBtn = styled.button`
   left: 70px;
   padding: 5px 10px;
   border-radius: 10px;
+  color: black;
   border: 2px solid var(--mainColor);
 
   &:hover {

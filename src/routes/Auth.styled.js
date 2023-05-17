@@ -14,6 +14,7 @@ export const SocialBtn = styled.button`
   border-radius: 20px;
   margin: 0 5px;
   border: 1px solid #aaa;
+  color: black;
 
   &:hover {
     border: 1px solid var(--mainColor);

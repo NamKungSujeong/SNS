@@ -20,6 +20,7 @@ const ModalContainer = styled.div`
   align-items: center;
   background: rgba(0, 0, 0, 0.3);
   z-index: 20;
+  color: black;
 `;
 
 const ModalContent = styled.div`
