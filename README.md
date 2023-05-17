@@ -13,7 +13,7 @@ https://namkungsujeong.github.io/SNS/
 
 ### 로컬 실행 방법
 ```
-$ git clone 
+$ git clone https://github.com/NamKungSujeong/SNS.git
 $ npm install
 $ npm start
 ```
