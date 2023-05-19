@@ -15,7 +15,7 @@ const AuthForm = () => {
   const [errorPw, setErrorPw] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 
-  let exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.com+/;
+  const emailValidation = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.com+/;
 
   // 회원가입/로그인
   const handleSubmit = async (e) => {
@@ -40,12 +40,10 @@ const AuthForm = () => {
   };
 
   const handleInputChange = (e) => {
-    const {
-      target: { name, value },
-    } = e;
+    const { name, value } = e.target;
     let errorMsg = "";
     if (name === "email") {
-      if (newAccount && !exptext.test(value)) {
+      if (newAccount && !emailValidation.test(value)) {
         errorMsg = "이메일 형식이 올바르지 않습니다.";
       }
       setEmail(value);
@@ -78,7 +76,7 @@ const AuthForm = () => {
           autoFocus
           required
         />
-        <S.ErrorMsg>{errorEmail}</S.ErrorMsg>
+        {errorEmail && <S.ErrorMsg>{errorEmail}</S.ErrorMsg>}
         <S.InputUser
           name="password"
           type="password"
@@ -88,7 +86,7 @@ const AuthForm = () => {
           required
           autoComplete="on"
         />
-        <S.ErrorMsg>{errorPw}</S.ErrorMsg>
+        {errorPw && <S.ErrorMsg>{errorPw}</S.ErrorMsg>}
         <S.InputSubmit type="submit">
           {newAccount ? "회원가입" : "로그인"}
         </S.InputSubmit>
