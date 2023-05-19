@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/SNS/static/css/main.289af161.css",
-    "main.js": "/SNS/static/js/main.0ff6f618.js",
+    "main.js": "/SNS/static/js/main.e402aa7f.js",
     "static/media/user.png": "/SNS/static/media/user.0d14c6999b4a5c8e86a7.png",
     "index.html": "/SNS/index.html"
   },
   "entrypoints": [
     "static/css/main.289af161.css",
-    "static/js/main.0ff6f618.js"
+    "static/js/main.e402aa7f.js"
   ]
 }
