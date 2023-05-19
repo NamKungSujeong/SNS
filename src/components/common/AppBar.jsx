@@ -6,14 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
-// import List from "@mui/material/List";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemAvatar from "@mui/material/ListItemAvatar";
-// import ListItemText from "@mui/material/ListItemText";
-// import ListSubheader from "@mui/material/ListSubheader";
 import Avatar from "@mui/material/Avatar";
-// import SearchIcon from "@mui/icons-material/Search";
-// import MoreIcon from "@mui/icons-material/MoreVert";
+
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
@@ -52,17 +46,6 @@ export default function BottomAppBar() {
   return (
     <React.Fragment>
       <CssBaseline />
-      {/* <Paper square sx={{ pb: "50px" }}>
-        <Typography
-          variant="h5"
-          gutterBottom
-          component="div"
-          sx={{ p: 2, pb: 0 }}
-        >
-          Inbox
-        </Typography>
-       
-      </Paper> */}
       <AppBar
         position="relative"
         sx={{
@@ -95,12 +78,6 @@ export default function BottomAppBar() {
             />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
-          {/* <IconButton color="inherit">
-            <SearchIcon />
-          </IconButton>
-          <IconButton color="inherit">
-            <MoreIcon />
-          </IconButton> */}
         </Toolbar>
       </AppBar>
     </React.Fragment>
