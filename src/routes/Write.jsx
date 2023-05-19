@@ -20,8 +20,7 @@ const Write = () => {
   const [posts, setPosts] = useState("");
   const [attachment, setAttachment] = useState("");
   const navigate = useNavigate();
-  const authConsumer = useContext(AuthContext);
-  const { userObj } = authConsumer;
+  const { userObj } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,14 +61,14 @@ const Write = () => {
     reader.readAsDataURL(theFile);
   };
 
-  const handleClearAttachmentClick = () => setAttachment(null);
+  const handleClearAttachmentClick = () => setAttachment("");
 
   const handleBackClick = () => {
     navigate(-1);
   };
 
   return (
-    <S.WriteContainer>
+    <div>
       <S.BackBtn>
         <FontAwesomeIcon
           icon={faArrowLeft}
@@ -86,13 +85,15 @@ const Write = () => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <Attachment
-          attachment={attachment}
-          handleClearAttachmentClick={handleClearAttachmentClick}
-        />
+        {attachment && (
+          <Attachment
+            attachment={attachment}
+            handleClearAttachmentClick={handleClearAttachmentClick}
+          />
+        )}
         <S.SubmitBtn type="submit">send</S.SubmitBtn>
       </S.PostForm>
-    </S.WriteContainer>
+    </div>
   );
 };
 export default Write;

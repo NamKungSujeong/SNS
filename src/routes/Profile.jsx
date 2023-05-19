@@ -25,10 +25,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
-  const authConsumer = useContext(AuthContext);
-  const { userObj } = authConsumer;
-  const postConsumer = useContext(PostContext);
-  const { creator, setCreator } = postConsumer;
+  const { userObj } = useContext(AuthContext);
+  const { creator } = useContext(PostContext);
 
   useEffect(() => {
     const q = query(
@@ -52,9 +50,6 @@ const Profile = () => {
     userObj.displayName,
     userObj.photoURL,
     creator.id,
-    creator.url,
-    creator.displayName,
-    setCreator,
     navigate,
   ]);
 
