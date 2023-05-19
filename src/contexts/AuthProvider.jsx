@@ -10,9 +10,9 @@ const AuthProvider = ({ children }) => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    onAuthStateChanged(authService, (user) => {
+    const unsubscribe = onAuthStateChanged(authService, (user) => {
       if (user) {
-        if (user.displayName == null) {
+        if (!user.displayName) {
           const userName = user.email.split("@")[0];
           user.displayName = userName;
         }
@@ -20,10 +20,15 @@ const AuthProvider = ({ children }) => {
         setUserObj(user);
       } else {
         setIsLoggedIn(false);
+        setUserObj(null);
       }
       setInit(true);
     });
-  }, [setIsLoggedIn]);
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, init, userObj }}>

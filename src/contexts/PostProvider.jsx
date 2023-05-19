@@ -19,13 +19,17 @@ const PostProvider = ({ children }) => {
       collection(dbService, "posts"),
       orderBy("createdAt", "desc")
     );
-    onSnapshot(q, (snapshot) => {
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const postArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setPosts(postArr);
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
