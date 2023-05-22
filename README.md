@@ -3,6 +3,10 @@
 ### 🔗 배포 주소
 https://namkungsujeong.github.io/SNS/
 
+test ID : test@naver.com
+<br />
+test PW : 111111
+
 ### 📚 사용 기술
 <div>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
